@@ -1,0 +1,378 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="95bb9d29-829f-47c9-b72a-1893ba79393e" name="Default Changelist" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CompilerWorkspaceConfiguration">
+    <option name="MAKE_PROJECT_ON_SAVE" value="true" />
+    <option name="PARALLEL_COMPILATION" value="true" />
+  </component>
+  <component name="DatabaseView">
+    <option name="SHOW_INTERMEDIATE" value="true" />
+    <option name="GROUP_DATA_SOURCES" value="true" />
+    <option name="GROUP_SCHEMA" value="true" />
+    <option name="GROUP_CONTENTS" value="false" />
+    <option name="SORT_POSITIONED" value="false" />
+    <option name="SHOW_EMPTY_GROUPS" value="false" />
+    <option name="AUTO_SCROLL_FROM_SOURCE" value="false" />
+    <option name="HIDDEN_KINDS">
+      <set />
+    </option>
+    <expand />
+    <select />
+  </component>
+  <component name="FavoritesManager">
+    <favorites_list name="phonesystem" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Interface" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHome" value="E:/maven/apache-maven-3.6.1" />
+        <option name="userSettingsFile" value="E:\maven\apache-maven-3.6.1\conf\settings.xml" />
+      </MavenGeneralSettings>
+    </option>
+    <option name="importingSettings">
+      <MavenImportingSettings>
+        <option name="downloadDocsAutomatically" value="true" />
+        <option name="downloadSourcesAutomatically" value="true" />
+        <option name="importAutomatically" value="true" />
+        <option name="jdkForImporter" value="1.8" />
+        <option name="vmOptionsForImporter" value="-Xmx768m" />
+      </MavenImportingSettings>
+    </option>
+  </component>
+  <component name="MavenRunner">
+    <option name="skipTests" value="true" />
+  </component>
+  <component name="ProjectId" id="1aw6mv9bb1IaU2QDt1btnv93UOs" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RequestMappingsPanelOrder0" value="0" />
+    <property name="RequestMappingsPanelOrder1" value="1" />
+    <property name="RequestMappingsPanelWidth0" value="75" />
+    <property name="RequestMappingsPanelWidth1" value="75" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="jdk.selected.JAVA_MODULE" value="1.8" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.39885056" />
+    <property name="settings.editor.selected.configurable" value="Errors" />
+    <property name="two.files.diff.last.used.file" value="$PROJECT_DIR$/cloud-jskj-common/src/main/resources/application.yml" />
+    <property name="two.files.diff.last.used.folder" value="$PROJECT_DIR$/cloud-jskj-common/src/main/resources" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.jskj.logistics.util" />
+      <recent name="com.jskj.myconfig" />
+      <recent name="com.jskj.config" />
+      <recent name="com.jskj.service.impl" />
+      <recent name="com.jskj.service" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\phonesystem\cloud-jskj-route9527\src\main\resources" />
+      <recent name="D:\phonesystem\cloud-jskj-user8004\src\main\java" />
+      <recent name="D:\phonesystem\ceshi1\src\main\resources\templates" />
+      <recent name="D:\phonesystem\cloud-jskj-static9001\src\main\resources\static" />
+      <recent name="D:\phonesystem\cloud-jskj- logistics8003\src\main\resources\mapper" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="configurationTypes">
+      <set>
+        <option value="SpringBootApplicationConfigurationType" />
+      </set>
+    </option>
+  </component>
+  <component name="RunManager" selected="Spring Boot.GetawayMain9527">
+    <configuration name="All in cloud-jskj-order8002" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="cloud-jskj-order8002" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="TEST_OBJECT" value="package" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ConfigCenterMain8006" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="cloud-jskj-configceter8006" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.jskj.configcenter.ConfigCenterMain8006" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="GetawayMain9527" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
+      <module name="cloud-jskj-route9527" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.jskj.route.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.jskj.route.GetawayMain9527" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="LogisticsMain8003" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="cloud-jskj- logistics8003" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.jskj.logistics.LogisticsMain8003" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ModelMain8007" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="cloud-jskj-model8007" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.jskj.model.ModelMain8007" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="OrderMain8002" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="cloud-jskj-order8002" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.jskj.order.OrderMain8002" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Paymant9001" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="cloud-jskj-payment9001" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.jskj.payment.Paymant9001" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="PaymentMain8001" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="cloud-jskj-payment8001" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.jskj.payment.PaymentMain8001" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="SiginMain8005" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="cloud-jskj-regist_or_sigin8005" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.jskj.sigin.SiginMain8005" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="StaticMain9001 (1)" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
+      <module name="cloud-jskj-static9001" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.jskj.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.jskj.StaticMain9001" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="UserMain8004" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="cloud-jskj-user8004" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.jskj.user.UserMain8004" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="JUnit.All in cloud-jskj-order8002" />
+      <item itemvalue="Spring Boot.ModelMain8007" />
+      <item itemvalue="Spring Boot.LogisticsMain8003" />
+      <item itemvalue="Spring Boot.UserMain8004" />
+      <item itemvalue="Spring Boot.OrderMain8002" />
+      <item itemvalue="Spring Boot.SiginMain8005" />
+      <item itemvalue="Spring Boot.ConfigCenterMain8006" />
+      <item itemvalue="Spring Boot.PaymentMain8001" />
+      <item itemvalue="Spring Boot.Paymant9001" />
+      <item itemvalue="Spring Boot.StaticMain9001 (1)" />
+      <item itemvalue="Spring Boot.GetawayMain9527" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Spring Boot.GetawayMain9527" />
+        <item itemvalue="Spring Boot.StaticMain9001 (1)" />
+        <item itemvalue="JUnit.All in cloud-jskj-order8002" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="ServiceViewManager">
+    <option name="viewStates">
+      <list>
+        <serviceView>
+          <treeState>
+            <expand>
+              <path>
+                <item name="services root" type="e789fda9:ObjectUtils$Sentinel" />
+                <item name="Spring Boot" type="7427dc5b:ServiceModel$ServiceGroupNode" />
+              </path>
+              <path>
+                <item name="services root" type="e789fda9:ObjectUtils$Sentinel" />
+                <item name="Spring Boot" type="7427dc5b:ServiceModel$ServiceGroupNode" />
+                <item name="Finished" type="7427dc5b:ServiceModel$ServiceGroupNode" />
+              </path>
+              <path>
+                <item name="services root" type="e789fda9:ObjectUtils$Sentinel" />
+                <item name="Spring Boot" type="7427dc5b:ServiceModel$ServiceGroupNode" />
+                <item name="Not Started" type="7427dc5b:ServiceModel$ServiceGroupNode" />
+              </path>
+            </expand>
+            <select />
+          </treeState>
+        </serviceView>
+      </list>
+    </option>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="95bb9d29-829f-47c9-b72a-1893ba79393e" name="Default Changelist" comment="" />
+      <created>1587634471970</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1587634471970</updated>
+      <workItem from="1587634474399" duration="446000" />
+      <workItem from="1587640607116" duration="5618000" />
+      <workItem from="1587717548199" duration="492000" />
+      <workItem from="1587735231005" duration="10529000" />
+      <workItem from="1587898576525" duration="621000" />
+      <workItem from="1587902513669" duration="1246000" />
+      <workItem from="1587913587246" duration="1236000" />
+      <workItem from="1587917868093" duration="990000" />
+      <workItem from="1588350804223" duration="917000" />
+      <workItem from="1588401424148" duration="1723000" />
+      <workItem from="1588428194550" duration="2837000" />
+      <workItem from="1588485696742" duration="1632000" />
+      <workItem from="1588488355972" duration="7950000" />
+      <workItem from="1588514058000" duration="9185000" />
+      <workItem from="1590634173495" duration="216000" />
+      <workItem from="1590836829992" duration="1229000" />
+      <workItem from="1590843955885" duration="1271000" />
+      <workItem from="1590845244255" duration="645000" />
+      <workItem from="1590845905373" duration="16833000" />
+      <workItem from="1590892750222" duration="13383000" />
+      <workItem from="1590909426805" duration="29995000" />
+      <workItem from="1590989315708" duration="2257000" />
+      <workItem from="1591023654446" duration="7612000" />
+      <workItem from="1591085616093" duration="21240000" />
+      <workItem from="1591117481851" duration="3860000" />
+      <workItem from="1591121419450" duration="3187000" />
+      <workItem from="1591200804795" duration="6267000" />
+      <workItem from="1591267439575" duration="19757000" />
+      <workItem from="1591328425307" duration="8730000" />
+      <workItem from="1591457721458" duration="782000" />
+      <workItem from="1591689307248" duration="3539000" />
+      <workItem from="1591708544418" duration="3706000" />
+      <workItem from="1591724804896" duration="3134000" />
+      <workItem from="1591763665556" duration="7995000" />
+      <workItem from="1592036042654" duration="468000" />
+      <workItem from="1592126446326" duration="450000" />
+      <workItem from="1592129392742" duration="286000" />
+      <workItem from="1592139268584" duration="6405000" />
+      <workItem from="1592146391967" duration="3483000" />
+      <workItem from="1592149896570" duration="12687000" />
+      <workItem from="1592193673395" duration="4806000" />
+      <workItem from="1592237724671" duration="7435000" />
+      <workItem from="1603389691479" duration="690000" />
+      <workItem from="1603391008898" duration="46000" />
+      <workItem from="1603430294200" duration="1785000" />
+      <workItem from="1604128039953" duration="41000" />
+      <workItem from="1604128200245" duration="31000" />
+      <workItem from="1604380872829" duration="3770000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="552" y="181" key="#Project_Structure" timestamp="1604383619016">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="552" y="181" key="#Project_Structure/0.0.1920.1040@0.0.1920.1040" timestamp="1604383619016" />
+    <state width="1293" height="282" key="GridCell.Tab.0.bottom" timestamp="1604386058537">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1493" height="210" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1603390382329" />
+    <state width="1293" height="282" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1604386058537" />
+    <state width="1293" height="282" key="GridCell.Tab.0.center" timestamp="1604386058537">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1493" height="210" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1603390382329" />
+    <state width="1293" height="282" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1604386058537" />
+    <state width="1293" height="282" key="GridCell.Tab.0.left" timestamp="1604386058537">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1493" height="210" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1603390382329" />
+    <state width="1293" height="282" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1604386058537" />
+    <state width="1293" height="282" key="GridCell.Tab.0.right" timestamp="1604386058537">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1493" height="210" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1603390382329" />
+    <state width="1293" height="282" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1604386058537" />
+    <state width="1293" height="282" key="GridCell.Tab.1.bottom" timestamp="1604386058537">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1293" height="282" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1604386058537" />
+    <state width="1293" height="282" key="GridCell.Tab.1.center" timestamp="1604386058537">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1293" height="282" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1604386058537" />
+    <state width="1293" height="282" key="GridCell.Tab.1.left" timestamp="1604386058537">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1293" height="282" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1604386058537" />
+    <state width="1293" height="282" key="GridCell.Tab.1.right" timestamp="1604386058537">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1293" height="282" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1604386058537" />
+    <state x="461" y="239" key="com.intellij.ide.util.TipDialog" timestamp="1603391015263">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="461" y="239" key="com.intellij.ide.util.TipDialog/0.0.1536.824@0.0.1536.824" timestamp="1603391015263" />
+    <state x="334" y="223" key="new project wizard" timestamp="1604128230038">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="334" y="223" key="new project wizard/0.0.1920.1040@0.0.1920.1040" timestamp="1604128230038" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/cloud-jskj-order8002/src/main/java/com/jskj/order/service/OrderServiceInf.java</url>
+          <line>42</line>
+          <properties class="com.jskj.order.service.OrderServiceInf" method="deleteAllByOid">
+            <option name="EMULATED" value="true" />
+          </properties>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+</project>

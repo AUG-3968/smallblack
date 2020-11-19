@@ -1,0 +1,45 @@
+<html xmlns:th=http://www.thymeleaf.org>
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/public/left.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/public/top.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/plug-in/font-awesome-4.7.0/css/font-awesome.min.css}"/>
+    <link rel="stylesheet" th:href="@{/css/customer/diy.css}">
+    <link rel="stylesheet" th:href="@{/plug-in/layui/css/layui.css}">
+    <script th:src="@{/js/jquery.js}" type="text/javascript" charset="utf-8"></script>
+    <script th:src="@{/plug-in/layui/layui.js}" type="text/javascript" charset="utf-8"></script>
+    <title></title>
+</head>
+<body>
+<a id="login">shduaudoa</a>
+<a id="login1">shduaudoa</a>
+</body>
+<script type="text/javascript">
+    $("#login").click(function(){
+        console.log("1111");
+        $.ajax({url:"http://localhost:8123/setKey",
+            type:'get',
+            dataType:'json',
+            xhrFields: {
+                withCredentials: true
+            },
+            jsonpCallback:"handleCallback",
+            success:function(result){
+                console.log(result.s);
+            }});
+    });
+    $("#login1").click(function(){
+        console.log("1111");
+        $.ajax({url:"http://localhost:8122/getKey",
+            type:'post',
+            dataType:'json',
+            xhrFields: {
+                withCredentials: true
+            },
+            jsonpCallback:"handleCallback",
+            success:function(result){
+                console.log(result.s);
+            }});
+    });
+</script>
+</html>

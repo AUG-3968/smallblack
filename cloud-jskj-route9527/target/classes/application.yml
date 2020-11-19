@@ -1,0 +1,54 @@
+server:
+  port: 9527
+
+spring:
+  application:
+    name: cloud-gateway
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 192.168.6.4:1111 #配置Nacos地址
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+          lower-case-service-id: true
+      routes:
+        - id: cloud-jskj-order
+          uri: lb://cloud-jskj-order
+          predicates:
+          - Path=/order/**,/orderlist/**
+
+        - id: cloud-jskj-logistics
+          uri: lb://cloud-jskj-logistics
+          predicates:
+          - Path=/logistics/**
+
+        - id: cloud-jskj-model
+          uri: lb://cloud-jskj-model
+          predicates:
+          - Path=/model/**
+
+        - id: cloud-jskj-static
+          uri: lb://cloud-jskj-static
+          predicates:
+            - Path=/jiemian/**, /static/**
+
+        - id: cloud-jskj-sigin
+          uri: lb://cloud-jskj-sigin
+          predicates:
+            - Path=/ls/**
+
+        - id: cloud-jskj-user
+          uri: lb://cloud-jskj-user
+          predicates:
+            - Path=/user/**
+
+
+
+management:
+  endpoint:
+  endpoints:
+    web:
+      exposure:
+        include: '*'

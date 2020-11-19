@@ -1,0 +1,321 @@
+<html xmlns:th=http://www.thymeleaf.org>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<link rel="stylesheet" type="text/css" th:href="@{/css/manager/ordermanager.css}"/>
+	<link rel="stylesheet" type="text/css" th:href="@{/css/public/top.css}"/>
+	<link rel="stylesheet" type="text/css" th:href="@{/css/public/left.css}"/>
+	<link rel="stylesheet" type="text/css" th:href="@{/plug-in/font-awesome-4.7.0/css/font-awesome.min.css}"/>
+	<link rel="stylesheet" type="text/css" th:href="@{/plug-in/layui/css/layui.css}" />
+	<script th:src="@{/js/jquery.js}" type="text/javascript" charset="utf-8"></script>
+	<script th:src="@{/plug-in/layui/layui.js}" type="text/javascript" charset="utf-8"></script>
+		<style type="text/css">
+		.layui-inline {
+			font-size:14px;
+		}
+		</style>
+</head>
+<body>
+<div class="top-1">
+	<div class="top-1-1">
+		<a>京鲨科技</a>
+	</div>
+	<div class="top-1-7">
+		<div style="margin-left: 14px;margin-top: 25px;padding-bottom: 20px;">
+			<i class="fa fa-power-off" onclick="quit()"></i>
+		</div>
+	</div>
+	<div class="top-1-6" th:text="${session.use.uname}">
+	</div>
+	<div class="top-1-5">
+		<img th:src="@{${session.use.uphoto}}">
+	</div>
+</div>
+	<div class="main">
+				<!-- 容器设置 -->
+				<div class="container">
+					<!-- 左部菜单设置 -->
+					<div class="left">
+						<ul class="left-1">
+							<div class="left-1-1">
+								<li>
+									<a th:href="@{/model2.action}"><i class="fa fa-arrow-circle-up" aria-hidden="true"></i>型号上传</a>
+								</li>
+							</div>
+							<div class="left-1-1">
+								<li>
+									<a th:href="@{/jiemian/modelmanager}"><i class="fa fa-arrow-circle-up" aria-hidden="true"></i>型号管理</a>
+								</li>
+							</div>
+							<div class="left-1-1">
+								<li>
+									<a th:href="@{/jiemian/ordermanager}"><i class="fa fa-list" aria-hidden="true"></i>订单管理</a>
+								</li>
+							</div>
+							<div class="left-1-1">							<li>
+								<a th:href="@{/jiemian/logistics}"><i class="fa fa-truck" aria-hidden="true"></i>物流管理</a>
+							</li>
+							</div>
+							<div class="left-1-1">
+								<li>
+									<a th:href="@{/jiemian/user}"><i class="fa fa-users" aria-hidden="true"></i>用户管理</a>
+								</li>
+							</div>
+						</ul>
+					</div>
+					<!-- 左部菜单结束 -->
+					<!-- 中间部分设置 -->
+					<div class="middle">
+						<!-- 添加中间模块容器 -->
+						<div class="middle-1">
+							<div class="middle-top">
+								<p style="color: black;font-size: 22px;">订单管理</p>
+							</div>
+							<div class="middle-mid">
+								<div class="model">
+									<div class="model-mid">
+										<input type="text" class="layui-input" id="test16" placeholder="按日期范围搜索" style="width: 250px;margin-bottom: 10px;height: 30px;float:left">
+										<input type="text" class="layui-input" id="content" placeholder="按发件人搜索" style="width: 250px;margin-left: 10px;height: 30px; float:left;">										
+									</div>
+									<button class="layui-btn layui-btn-sm" lay-event="" id="search" style="margin-left: 18px;margin-bottom:10px">搜索</button>								
+								<table class="layui-hide" id="test" lay-filter="test"></table>
+								<script type="text/html" id="toolbarDemo">
+							  		<div class="layui-btn-container">
+									<button class="layui-btn layui-btn-sm" lay-event="deleteThis">批量删除</button>
+									<button class="layui-btn layui-btn-sm" lay-event="produc">开始生产</button>
+									<button class="layui-btn layui-btn-sm" lay-event="refund">同意退款</button>
+								  </div>	
+								</script>
+								<script type="text/html" id="barDemo">
+								  <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+								</script>
+								<script type="text/html" id="ostate1">
+	  							<!-- 这里的 checked 的状态只是演示 -->
+	  							<div name="ostate" title="订单状态" lay-filter="lockDemo"> {{ d.ostate == 1 ? '已生产' : d.ostate == 2 ? '退款中' : d.ostate == 3 ? '已退款'  : '已付款' }}</div>
+		   						</script>								
+								<script>
+								layui.use(['jquery'], function(){
+						    		var $ = jQuery = layui.$;
+								function quit() {
+									layer.confirm('确定是否退出', {
+										btn: ['确定', '取消'] //按钮
+									}, function () {
+										window.location.href = "/quit.action";
+									}, function () {
+									});
+								}
+								});
+									layui.use('laydate', function(){
+										var d = new Date();
+										var month = d.getMonth() +1;
+										var year = d.getFullYear()+"-"+month+"-"+d.getDate();
+										var laydate = layui.laydate;
+										laydate.render({
+											elem: '#test16'
+											,type: 'date'
+											,range: '到'
+											,format: 'yyyy-MM-dd'
+											,min: '2017-1-1'
+											,max: year
+										  	,done: function(value, date, endDate){
+											    console.log(date); //得到日期时间对象：{year: 2017, month: 8, date: 18, hours: 0, minutes: 0, seconds: 0}
+											    console.log(endDate); //得结束的日期时间对象，开启范围选择（range: true）才会返回。对象成员同上。
+											    var time=value;
+										  	}
+										  });
+									});
+
+								
+									</script>
+									<script>
+									
+									table();//第一次进入table
+									layui.use(['jquery'], function(){
+							    		var $ = jQuery = layui.$;
+										$("#search").click(function(){
+											table();
+										});
+									});	
+									function table(){
+									layui.use('table', function(){
+									  var table = layui.table
+									  ,form = layui.form;
+									  var data;
+									 
+									 		 var time = document.getElementById("test16").value;
+									  		var content = document.getElementById("content").value;
+									  var uid = '';
+									  var uoid = '';
+									  table.render({
+										elem: '#test'
+										,cellMinWidth: 80
+										// ,overflow: auto
+										,width:1250
+										,url:'http://localhost:9527/order/orders?time='+time+'&content='+content+'&uid='+uid+'&uoid='+uoid
+										,toolbar: '#toolbarDemo'
+										,title: '用户数据表'
+										,cols: [
+											  [
+										  {type: 'checkbox', fixed: 'left'}
+										  ,{field:'oid', title:'订单编号', width:150, fixed: 'left', unresize: true, sort: true}
+										  ,{field:'urealname', title:'发件人', width:80, edit: 'text'}
+										  ,{field:'umoneryno', title:'退款号码', width:120, edit: 'text'}
+										  ,{field:'osale', title:'金额', width:80, edit: 'text', sort: true}
+										  ,{field:'odate', title:'下单日期', width:170}
+										  ,{field:'ostate', title:'订单状态', width:90,templet:'#ostate1'}
+										  ,{field:'lame', title:'收件人', width:80}
+										  ,{field:'connumber', title:'固话', width:120}
+										  ,{field:'ladress', title:'收货地址', width:200}
+										  ,{field:'osendinfo', title:'发货信息', width:120}
+										  ,{field:'pnnumber', title:'宝贝数量', width:120}
+										  ,{fixed: 'right', title:'操作', toolbar: '#barDemo'}
+										]
+										  ]
+										,page: true
+										,done: function(res, curr, count){
+											  //如果是异步请求数据方式，res即为你接口返回的信息。
+											  //如果是直接赋值的方式，res即为：{data: [], count: 99} data为当前页数据、count为数据总长度
+											  //console.log(res);
+											  data = res.data;
+											}
+									  });
+									  
+									  //头工具栏事件
+									  table.on('toolbar(test)', function(obj){
+										var checkStatus = table.checkStatus(obj.config.id);
+										switch(obj.event){
+										 case 'deleteThis':
+												var data = checkStatus.data;
+												var ids=[];
+												data.forEach(function(index,i) {
+													ids.push(index.oid);
+												});
+												if(ids!=''){
+													$.ajax({
+														url: 'http://localhost:9527/order/deleteOrdersByoids.action',
+														type:'post',
+														dataType:'json',
+														data:"oids="+ids,
+														success:function (datas,statusText) {
+															if(datas=='1'){
+																layer.msg('删除成功');
+																table.reload(obj.config.id,{});
+															}else{
+																 layer.msg('删除失败');
+															}
+														}
+													})
+												}
+										  break;
+										  case 'refund':
+												var data = checkStatus.data;
+												var ids=[];
+												data.forEach(function(index,i) {
+													ids.push(index.oid);
+												});
+												if(ids!=''){
+													$.ajax({
+														url: 'http://localhost:9527/order/agreerefund.action',
+														type:'post',
+														dataType:'json',
+														data:"oids="+ids,
+														success:function (datas,statusText) {
+															if(datas=='1'){
+																layer.msg('退款成功');
+																table.reload(obj.config.id,{});
+															}else{
+																 layer.msg('退款失败');
+															}
+														}
+													})
+												}
+										  break;
+										  case 'produc':
+												var data = checkStatus.data;
+												var ids=[];
+												data.forEach(function(index,i) {
+													ids.push(index.oid);
+												});
+												if(ids!=''){
+													$.ajax({
+														url: 'http://localhost:9527/order/agreeproduc.action',
+														type:'post',
+														dataType:'json',
+														data:"oids="+ids,
+														success:function (datas,statusText) {
+															if(datas=='1'){
+																layer.msg('生产成功');
+																table.reload(obj.config.id,{});
+															}else{
+																 layer.msg('操作失败');
+															}
+														}
+													})
+												}
+										  break;
+										  case 'produc':
+												var data = checkStatus.data;
+												var ids=[];
+												data.forEach(function(index,i) {
+													ids.push(index.oid);
+												});
+												if(ids!=''){
+													$.ajax({
+														url: 'http://localhost:9527/order/agreeproduc.action',
+														type:'post',
+														dataType:'json',
+														data:"oids="+ids,
+														success:function (datas,statusText) {
+															if(datas=='1'){
+																layer.msg('生产成功');
+																table.reload(obj.config.id,{});
+															}else{
+																 layer.msg('操作失败');
+															}
+														}
+													})
+												}
+										  break;
+										};
+									  });
+									  
+									  //监听行工具事件
+									  table.on('tool(test)', function(obj){
+										var data = obj.data;
+										console.log(time);
+										//console.log(obj)
+										if(obj.event === 'del'){
+										  layer.confirm('真的删除行么', function(index){
+											obj.del();
+											layer.close(index);
+											var datas ={"oid":data.oid};
+											$.post("http://localhost:9527/order/deleteOrdersByoid.action",datas);
+										  });
+										} else if(obj.event === 'edit'){
+										  layer.prompt({
+											formType: 2
+											,value: data.email
+										  }, function(value, index){
+											obj.update({
+											  email: value
+											});
+											layer.close(index);
+										  });
+										}
+									  });
+									});
+									}
+									
+								
+									
+									</script>
+								</div>
+						</div>
+						<!-- 中间容器结束 -->
+					</div>
+				<!-- 中间容器结束 -->
+		</div>
+		</div>
+		</div>
+</body>
+</html>

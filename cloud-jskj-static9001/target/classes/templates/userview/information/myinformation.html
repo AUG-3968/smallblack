@@ -1,0 +1,434 @@
+<html xmlns:th=http://www.thymeleaf.org>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Insert title here</title>
+<link rel="stylesheet" type="text/css" th:href="@{/css/user/myinformation/myinformation.css}"/>
+<link rel="stylesheet" type="text/css" th:href="@{/css/public/top.css}"/>
+<link rel="stylesheet" type="text/css" th:href="@{/css/public/left.css}"/>
+<link rel="stylesheet" type="text/css" th:href="@{/plug-in/font-awesome-4.7.0/css/font-awesome.css}"/>
+<link rel="stylesheet" type="text/css" th:href="@{/plug-in/layui/css/layui.css}"/>
+<script th:src="@{/plug-in/jquery.min.js}" type="text/javascript" charset="utf-8"></script>
+<script th:src="@{/plug-in/layui/layui.js}" type="text/javascript" charset="utf-8"></script>
+<style type="text/css">
+	.register-tip-null{
+		color: red;
+		margin: 15px 200px;
+	}
+	#demo1{
+	height:90px;
+	border-radius:50%;
+	
+	}
+	#img{
+		position: absolute;
+		margin-left: 170px;
+	}
+	#button{
+		position: absolute;
+		margin-top:35px;
+		margin-left: 40px;
+	}
+</style>
+</head>
+
+	<body>
+	<!-- 顶部界面设置开始 -->
+	<div class="top-1">
+		<div class="top-1-1">
+			<a>京鲨科技</a>
+		</div>
+		<div class="top-1-7">
+			<div style="margin-left: 14px;margin-top: 25px;padding-bottom: 20px;">
+				<i class="fa fa-power-off" onclick="quit()"></i>
+			</div>
+		</div>
+		<div class="top-1-7" th:if="${#lists.isEmpty(session.message)}">
+			<div style="margin-left: 14px;margin-top: 25px;padding-bottom: 20px;"><i class="fa fa-bell"></i></div>
+			<div class="jd-b-1-8-1">
+
+				<div style="height: 300px; width: 320px;background-color: white;border-bottom: 1px solid #DEE1E6;overflow: auto;color: black;">
+					消息
+					<div style="height: 70px;padding:10px 20px 0 20px ;border-bottom: 1px solid #DEE1E6;" th:each="m:${session.message}">
+						<div style="font-size: 10px;background-color: #DEE1E6;text-align: center;border-radius: 3px;" th:text="${m.mtime}"></div>
+						<div style="float: left;height: 57px;">
+							<img src="@{/img/head.jpg}" style="height: 40px; border-radius: 10px;" />
+						</div>
+						<div style=" float: left;font-size: 14px;margin-left: 10px;width: 200px;">
+							<div>鲸鲨</div>
+						</div>
+						<div style="float: left;font-size: 10px;width: 200px;margin-left: 10px;margin-top: 10px; cursor:pointer;" onclick="mess(${m.mis})">
+							<div th:text="${m.mcontent}">$</div>
+						</div>
+					</div>
+				</div>
+				<!--全部页面 -->
+				<div style="height: 50px; color:black">
+					<div style="float: left;font-size: 12px; line-height: 50px;margin-right: 20px;cursor:pointer;" onclick="haveread()">一键已读</div>
+
+				</div>
+			</div>
+			<!-- 无消息 -->
+		</div>
+		<div class="top-1-7">
+			<div style="margin-left: 14px;margin-top: 25px;padding-bottom: 20px;"  id="cart">
+				<i class="fa fa-shopping-cart" ></i>
+			</div>
+			<div class="jd-b-1-8-2">
+				<p style="color: #000000;font-size: 16px;margin: 2px 0px 0px 5px;">
+					购物车
+				</p>
+				<div style="width: 540px;margin: 4px 0px 0px 5px;">
+					<table class="layui-hide" id="test"  lay-filter="demo"></table>
+				</div>
+			</div>
+		</div>
+		<div class="top-1-6" th:text="${session.use.uname}">
+
+		</div>
+		<div class="top-1-5">
+			<img th:src="@{${session.use.uphoto}}">
+		</div>
+
+	</div>
+	<!-- 顶部界面结束 -->
+		<!-- 主界面设置 -->
+		<div class="main">
+			<!-- 容器设置 -->
+			<div class="container">
+				<!-- 左部菜单设置 -->
+				<div class="left">
+					<ul class="left-1">
+						<div class="left-1-1">
+							<li>
+								<a th:href="@{/jiemian/diy}"><i class="fa fa-comments-o fa-lg" aria-hidden="true"></i>Diy订制</a>
+							</li>
+						</div>
+
+						<div class="left-1-1">
+							<li>
+								<a th:href="@{/jiemian/batch}"><i class="fa fa-file-word-o fa-lg" aria-hidden="true"></i>批量定制</a>
+							</li>
+						</div>
+						<div class="left-1-1">
+							<li>
+								<a th:href="@{/jiemian/getOrdermess}"><i class="fa fa-database fa-lg" aria-hidden="true"></i>订单管理</a>
+							</li>
+						</div>
+						<div class="left-1-1">
+							<li>
+								<a th:href="@{/jiemian/getWuliumess}"><i class="fa fa-user-plus fa-lg" aria-hidden="true"></i>物流信息</a>
+							</li>
+						</div>
+						<div class="left-1-1">
+							<li>
+								<a th:href="@{/jiemian/findMyinformation}"><i class="fa fa-heart fa-lg" aria-hidden="true"></i>我的信息</a>
+							</li>
+						</div>
+						<div class="left-1-1">
+							<li>
+								<a><i class="fa fa-star fa-lg" aria-hidden="true"></i>使用说明</a>
+							</li>
+						</div>
+					</ul>
+				</div>
+				<!-- 左部菜单结束 -->
+				<!-- 中间部分设置 -->
+				<div class="my">
+					<div class="my-1">
+						<div class="middle-1">
+							<!--个人信息区域开始 -->
+							<script th:src="@{/plug-in/citys.js}" type="text/javascript" charset="utf-8"></script>
+							<script th:src="@{/plug-in/jquery.min.js}" type="text/javascript" charset="utf-8"></script>
+							<div class="manager-1">
+								<p style="color: black;font-size: 22px;">我的信息</p>
+							</div>		
+							
+							<div class="information" style="height:100px;width:100px;">
+								<div class="layui-upload" >
+								  <div class="layui-upload-list" id="img">
+								    <img class="layui-upload-img" id="demo1">
+								    <p id="demoText"></p>
+								  </div>
+								  <div id="button">
+								  	<button type="button" class="layui-btn" id="test1" style="float:left;">更换头像</button>
+								  </div>
+								</div>   
+							</div>
+								<div class="infomation-row base">
+									<form action="${pageContext.servletContext.contextPath}/update.action" method="post" id="form" onsubmit="return register()" >
+										<div class="acount_form">
+											<label for="name">真实姓名：</label>
+											<input type="text" name="urealname" id="urealname" th:value="${session.use.urealname}" onblur="tipnullno()">
+											<div >
+												<span class="register-tip-null" id="valinullno"></span>
+											</div>
+										</div>
+										<div class="acount_form">
+											<label for="name">支付宝账号：</label>
+											<input type="text" name="umoneryno" id="umoneryno" th:value="${session.use.umoneryno}" onblur="yzzfb()">
+											<div>
+												<span class="register-tip-null" id="zfberror"></span>
+											</div>
+										</div>
+										<div class="acount_form">
+											<label for="name">性别：</label>
+											<div class="infomation-input">
+												<span th:if="${session.use.usex ==1 }">
+													 <label>
+														<input value="${user.usex }" id="1" type="radio" name="usex" checked onclick="sex(this)" >男
+													</label>
+													 <label>
+														<input value="${user.usex }" id="2" type="radio"  name="usex"  onclick="sex(this)">女													</label>
+												</span>
+												<span th:if="${session.use.usex == 2 }">
+													 <label>
+														<input value="1" id="3" type="radio" name="usex" onclick="sex(this)" >男
+													</label>
+													 <label>
+														<input value="2" id="4" type="radio"  name="usex" checked  onclick="sex(this)">女
+													</label>
+												</span>
+											</div>										
+										</div>
+										<div class="infomation_save">
+											<input type="submit" name="save" id="save" value="保存" />
+										</div>
+									</form>
+										<script type="text/javascript">
+										
+										function sex(obj){
+											var value = obj.value;
+										}
+										
+										function register(){ 
+											//tipnullno ad yzzfb
+											if(tipnullno() && yzzfb()){
+												return true;
+											}else{
+												return false;
+											}
+											
+											console.log(register());
+										}
+										function tipnullno() {
+											var bool = true;
+											var urealname = document.getElementById("urealname").value;
+											var name = /^[\u4e00-\u9fa5]+$/;
+											if (""==urealname) {
+												bool = false;
+												document.getElementById("valinullno").innerHTML = "真实姓名不能为空";
+												document.getElementById("valinullno").style.display ="block";
+											}else if(!name.test(urealname)){
+												bool = false;
+												document.getElementById("valinullno").innerHTML = "真实姓名只能为中文";
+												document.getElementById("valinullno").style.display ="block";
+											}
+											else{
+												document.getElementById("valinullno").style.display ="none";
+											}
+											return bool;
+										}
+										function quit(){
+											layer.confirm('确定是否退出',{
+												  btn: ['确定','取消'] //按钮
+												}, function(){
+													window.location.href="/quit.action";
+												}, function(){
+												});
+										}
+										function yzzfb(){
+											var bool = true;
+											var name = document.getElementById("umoneryno").value;
+											var umonery = /^1\d{10}$/;
+											if (""==name || name.length != 11) {
+												bool = false;
+												document.getElementById("zfberror").innerHTML = "请填入正确的支付宝账号";
+												document.getElementById("zfberror").style.display ="block";
+												
+											}else if(!umonery.test(name)){
+												bool = false;
+												document.getElementById("zfberror").innerHTML = "请填入正确的支付宝账号,只能为数字";
+												document.getElementById("zfberror").style.display ="block";
+											}
+											else{
+												document.getElementById("zfberror").style.display ="none";
+											} 
+											return bool;
+										}
+										
+										function change(){
+											document.getElementById("ss").submit();
+										}
+										
+										function yanpwd(){
+											var bool = true;
+											var b = document.getElementById("ypwd").style.display;
+											if(b == "block"){
+												bool = false;
+											}
+											var p ={};
+											p.pwd = document.getElementById("old").value;
+											$.ajax({
+												type:"post",
+												url:'${pageContext.servletContext.contextPath}/judgepwd.action',
+												data:p,
+												success:function(result) {
+													if(result =="bu") {
+														document.getElementById("ypwd").style.display="block";
+														bool = false;
+													}else{
+														document.getElementById("ypwd").style.display="none";
+													}
+												}
+											});
+											return bool;
+										}
+										function newpwd(){
+											var bool = true;
+											var b = document.getElementById("ynew").style.display;
+											if(b == "block"){
+												bool = false;
+											}
+											var p ={};
+											var newpwd = /^\w{6,12}$/;
+											p.pwd = document.getElementById("new").value;
+											if(!newpwd.test(p.pwd)){
+												console.log(p.pwd);
+												document.getElementById("ynew").innerHTML = "密码必须是6-12位数字或字母";
+												document.getElementById("ynew").style.display ="block";
+												bool = false;
+											}else if(newpwd != ""){
+												$.ajax({
+													type:"post",
+													url:'${pageContext.servletContext.contextPath}/judgepwd.action',
+													data:p,
+													success:function(result) {
+														if(result =="same") {
+															document.getElementById("ynew").innerHTML = "不能和原密码一致";
+															document.getElementById("ynew").style.display ="block";
+															bool = false;
+														}
+														else{
+															document.getElementById("ynew").style.display ="none";
+														} 
+													}
+												});
+											}
+											else{
+												document.getElementById("ynew").style.display ="none";
+											}
+											
+											return bool;
+										}
+										
+										function epwd(){
+											var bool = true;
+											var b = document.getElementById("new").value;
+											var newpwd = document.getElementById("enew").value;
+											if(!(b == newpwd)){
+												document.getElementById("yenew").innerHTML = "两次密码须一致";
+												document.getElementById("yenew").style.display ="block";
+												bool = false;
+											}else {
+												document.getElementById("yenew").style.display ="none";
+											}
+											return bool;
+										}
+										layui.use('layer', function(){ //独立版的layer无需执行这一句
+											var $ = layui.jquery, layer = layui.layer; //独立版的layer无需执行这一句
+											//触发事件
+											var active = {
+												notice: function(){
+													//示范一个公告层
+													layer.open({
+														type: 1
+														,title: ['修改密码', 'background-color:white;']//不显示标题栏
+														,closeBtn: 1
+														,area: ['500px', '300px']
+														,shade: 0
+														,id: 'LAY_layuipro' //设定一个id，防止重复弹出
+														,btn: ['确定', '取消']
+														,btnAlign: 'c'
+														,moveType: 1 //拖拽模式，0或者1
+														,content: '<div style="padding: 20px;color:black;height:160px;background-color: #f8f8f8;font-size: 16px;">'
+														+'<span>原来密码：</span><input type="password" name="password" value="" id="old" style=" border-radius: 3px;border: none;padding-left: 5px;height:26px;" onblur="yanpwd()"/>'
+														+'<span style="float:right;color:red;width:150px;display:none;" id="ypwd" >须和原密码一致</span></br></br>'
+														+'<span>新的密码：</span><input type="password" name="newpassword" value="" id="new" style=" border-radius: 3px;border: none;padding-left: 5px;height:26px;" onblur="newpwd()"/>'
+														+'<span style="float:right;color:red;width:150px;display:none;" id="ynew"></span></br></br>'
+														+'<span>再次确认：</span><input type="password" name="epassword" value="" id="enew" style="border-radius: 3px;border: none;padding-left: 5px;height:26px;" onblur="epwd()"/>'
+														+'<span style="float:right;color:red;width:150px;" id="yenew"></span></div>'
+														,success: function(layero){
+															var btn = layero.find('.layui-layer-btn');
+															btn.find('.layui-layer-btn0').attr({
+															});
+														}
+														,yes: function(index,layero) {
+															if( yanpwd() && newpwd() && epwd()){
+																var pwd = document.getElementById("enew").value;
+																$.post("${pageContext.servletContext.contextPath}/updatepwd.action?pwd="+pwd);
+																layer.close(index);
+															}
+														}
+														
+													});
+													}
+											}; 
+											$('#layerDemo .layui-btn').on('click', function(){
+												var othis = $(this), method = othis.data('method');
+												active[method] ? active[method].call(this, othis) : '';
+											});
+										});
+										
+										layui.use('upload', function(){
+											  var $ = layui.jquery
+											  ,upload = layui.upload;
+											  //普通图片上传
+											  var uploadInst = upload.render({
+											    elem: '#test1'
+											    ,url: '${pageContext.servletContext.contextPath}/changdePhoto.action'
+									    	    ,before: function(obj){
+										    	     //预读本地文件示例，不支持ie8
+										    	     obj.preview(function(index, file, result){
+										    	    	 $('#demo1').attr('src', result); //图片链接（base64）
+										    	      });
+									    	     }
+											    ,done: function(res){
+											      //如果上传失败
+											      if(res.code > 0){
+											        return layer.msg('上传失败');
+											      }
+											      $('#demo1').attr('src', res.date.src); //图片链接（base64）
+											      //上传成功
+											    }
+											    ,error: function(){
+											      //演示失败状态，并实现重传
+											      var demoText = $('#demoText');
+											      demoText.html('<span style="color: #FF5722;">上传失败</span> <a class="layui-btn layui-btn-xs demo-reload">重试</a>');
+											      demoText.find('.demo-reload').on('click', function(){
+											        uploadInst.upload();
+											      });
+											    }
+											  });
+											 });
+									</script>								
+									<!-- 地区选择JS结束 -->
+									<!-- 保存按钮DIV开始 -->
+									
+									<!-- 保存按钮DIV结束 -->
+									<!-- 修改密码按钮DIV开始 -->
+									<div class="site-demo-button" id="layerDemo" style="margin-bottom: 0;">
+										 <button data-method="notice" class="layui-btn">修改密码</button>
+									</div>
+									<!-- 修改密码按钮DIV结束 -->
+
+								</div>
+							</div>
+							<!-- 基本信息区域结束 -->
+						</div>
+					</div>
+					
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

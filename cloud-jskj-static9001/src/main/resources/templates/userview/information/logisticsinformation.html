@@ -1,0 +1,380 @@
+<html xmlns:th=http://www.thymeleaf.org>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<link rel="stylesheet" type="text/css" th:href="@{/css/user/logistics/ordermanager.css}"/>
+<link rel="stylesheet" type="text/css" th:href="@{/css/public/top.css}"/>
+<link rel="stylesheet" type="text/css" th:href="@{/css/public/left.css}"/>
+<link th:href="@{/css/user/logistics/logistics information.css}" rel="stylesheet" />
+<link rel="stylesheet" type="text/css" th:href="@{/plug-in/font-awesome-4.7.0/css/font-awesome.min.css}"/>
+<link rel="stylesheet" type="text/css" th:href="@{/plug-in/layui/css/layui.css}" />
+<script th:src="@{/js/jquery.js}" type="text/javascript" charset="utf-8"></script>
+<script th:src="@{/plug-in/layer-v3.1.1/layer/layer.js}" type="text/javascript" charset="utf-8"></script>
+<script th:src="@{/plug-in/layui/layui.js}" type="text/javascript" charset="utf-8"></script>
+<style type="text/css">
+	.layui-inline {
+		font-size:14px;
+	}
+	#test16{
+		width:250px;
+	}
+	#test15{
+		width:110px;
+	}
+</style>
+</head>
+<body>
+<!-- 顶部界面设置开始 -->
+<div class="top-1">
+	<div class="top-1-1">
+		<a>京鲨科技</a>
+	</div>
+	<div class="top-1-7">
+		<div style="margin-left: 14px;margin-top: 25px;padding-bottom: 20px;">
+			<i class="fa fa-power-off" onclick="quit()"></i>
+		</div>
+	</div>
+	<div class="top-1-7" th:if="${#lists.isEmpty(session.message)}">
+		<div style="margin-left: 14px;margin-top: 25px;padding-bottom: 20px;"><i class="fa fa-bell"></i></div>
+		<div class="jd-b-1-8-1">
+
+			<div style="height: 300px; width: 320px;background-color: white;border-bottom: 1px solid #DEE1E6;overflow: auto;color: black;">
+				消息
+				<div style="height: 70px;padding:10px 20px 0 20px ;border-bottom: 1px solid #DEE1E6;" th:each="m:${session.message}">
+					<div style="font-size: 10px;background-color: #DEE1E6;text-align: center;border-radius: 3px;" th:text="${m.mtime}"></div>
+					<div style="float: left;height: 57px;">
+						<img src="@{/img/head.jpg}" style="height: 40px; border-radius: 10px;" />
+					</div>
+					<div style=" float: left;font-size: 14px;margin-left: 10px;width: 200px;">
+						<div>鲸鲨</div>
+					</div>
+					<div style="float: left;font-size: 10px;width: 200px;margin-left: 10px;margin-top: 10px; cursor:pointer;" onclick="mess(${m.mis})">
+						<div th:text="${m.mcontent}">$</div>
+					</div>
+				</div>
+			</div>
+			<!--全部页面 -->
+			<div style="height: 50px; color:black">
+				<div style="float: left;font-size: 12px; line-height: 50px;margin-right: 20px;cursor:pointer;" onclick="haveread()">一键已读</div>
+
+			</div>
+		</div>
+		<!-- 无消息 -->
+	</div>
+	<div class="top-1-7">
+		<div style="margin-left: 14px;margin-top: 25px;padding-bottom: 20px;"  id="cart">
+			<i class="fa fa-shopping-cart" ></i>
+		</div>
+		<div class="jd-b-1-8-2">
+			<p style="color: #000000;font-size: 16px;margin: 2px 0px 0px 5px;">
+				购物车
+			</p>
+			<div style="width: 540px;margin: 4px 0px 0px 5px;">
+				<table class="layui-hide" id="test"  lay-filter="demo"></table>
+			</div>
+		</div>
+	</div>
+	<div class="top-1-6" th:text="${session.use.uname}">
+
+	</div>
+	<div class="top-1-5">
+		<img th:src="@{${session.use.uphoto}}">
+	</div>
+
+</div>
+<!-- 顶部界面结束 -->
+	<div class="main">
+		<!-- 容器设置 -->
+		<div class="container">
+			<!-- 左部菜单设置 -->
+			<div class="left">
+				<ul class="left-1">
+					<div class="left-1-1">
+						<li>
+							<a th:href="@{/jiemian/diy}"><i class="fa fa-comments-o fa-lg" aria-hidden="true"></i>Diy订制</a>
+						</li>
+					</div>
+
+					<div class="left-1-1">
+						<li>
+							<a th:href="@{/jiemian/batch}"><i class="fa fa-file-word-o fa-lg" aria-hidden="true"></i>批量定制</a>
+						</li>
+					</div>
+					<div class="left-1-1">
+						<li>
+							<a th:href="@{/jiemian/getOrdermess}"><i class="fa fa-database fa-lg" aria-hidden="true"></i>订单管理</a>
+						</li>
+					</div>
+					<div class="left-1-1">
+						<li>
+							<a th:href="@{/jiemian/getWuliumess}"><i class="fa fa-user-plus fa-lg" aria-hidden="true"></i>物流信息</a>
+						</li>
+					</div>
+					<div class="left-1-1">
+						<li>
+							<a th:href="@{/jiemian/findMyinformation}"><i class="fa fa-heart fa-lg" aria-hidden="true"></i>我的信息</a>
+						</li>
+					</div>
+					<div class="left-1-1">
+						<li>
+							<a><i class="fa fa-star fa-lg" aria-hidden="true"></i>使用说明</a>
+						</li>
+					</div>
+				</ul>
+			</div>
+			<!-- 左部菜单结束 -->
+			<!-- 中间部分设置 -->
+			<div class="middle">
+				<!-- 添加中间模块容器 -->
+				<div class="middle-1">
+					<div class="middle-top">
+						<p style="color: black;font-size: 22px;">物流信息</p>
+					</div>
+					<div class="middle-mid">
+						<div class="model">
+						<div class="logistics-1">
+							<div class="logistics-1-1">
+								<button type="button" class="layui-btn layui-btn-radius" id="demoTable" data-type="getCheckData" lay-event="deleteThis">批量删除</button>
+							</div>
+							<form action="" method="post">
+								<div class="logistics-1-3">
+									<div class="layui-inline">
+										<label class="layui-form-label" id="test15">请选择日期范围</label>
+										<div class="layui-input-inline">
+										<input type="text" class="layui-input" id="test16" placeholder="开始 到 结束">
+										</div>
+									</div>
+								</div>
+								<div class="logistics-1-4">
+									<input type="text" name="content" id="content" placeholder="请输入你想查询的内容" class="logistics-1-4-1"/>
+								</div>
+								<div class="logistics-1-5">
+									<button type="button" class="layui-btn layui-btn-normal" id="search"><i class="layui-icon">&#xe615;</i></button>
+								</div>
+							</form>
+						</div>
+						<table class="layui-hide" id="mytabl" lay-filter="mytabl"></table>
+						<script type="text/html" id="barDemo">
+								  <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+								</script>
+													
+						<script>
+						layui.use('laydate', function(){
+							var d = new Date();
+							var month = d.getMonth()+1;
+							var year = d.getFullYear()+"-"+month+"-"+d.getDate();
+							var laydate = layui.laydate;
+							laydate.render({
+								elem: '#test16'
+								,type: 'date'
+								,range: '到'
+								,format: 'yyyy-MM-dd'
+								,min: '2017-1-1'
+								,max: year
+							  });
+						});
+						
+						table();//第一次进入table
+						$("#search").click(function(){
+							table();
+						});
+						function quit(){
+							layer.confirm('确定是否退出',{
+								  btn: ['确定','取消'] //按钮
+								}, function(){
+									window.location.href="/quit.action";
+								}, function(){
+								});
+						}
+						function table(){
+							layui.use('table', function(){
+							var table = layui.table
+							,form = layui.form;
+							var data;
+							var time = document.getElementById("test16").value;
+							var content = document.getElementById("content").value;
+							table.render({
+							elem: '#mytabl'
+							// ,overflow: auto
+
+							,url:'http://localhost:9527/logistics/logistics?time='+time+'&content='+content
+							,toolbar: '#toolbarDemo'
+							,title: '物流信息'
+								,xhrFields: {
+									withCredentials: true
+								}
+							,cols: [
+									[
+									{type: 'checkbox', fixed: 'left'}
+									,{field:'oid', title:'订单号', width:120, unresize: true, sort: true}
+									,{field:'odate', title:'下单日期', width:120,sort:true}
+									,{field:'lame', title:'收件人', width:60}
+									,{field:'connumber', title:'电话', width:120, sort: true}
+									,{field:'ladress', title:'详细地址', width:120}
+									,{field:'lcompany', title:'快递公司', width:120}
+									,{field:'lorder', title:'快递单号', width:120}
+									,{field:'tbid', title:'淘宝单号', width:120}
+									,{fixed: 'right', title:'操作', toolbar: '#barDemo', width:80}
+							]
+								]
+							,where: { type: "all" }
+							,page: true
+							,done: function(res, curr, count){
+								  //如果是异步请求数据方式，res即为你接口返回的信息。
+								  //如果是直接赋值的方式，res即为：{data: [], count: 99} data为当前页数据、count为数据总长度
+								  //console.log(res);
+								  data = res.data;
+								}
+							 });
+							  
+							  //头工具栏事件
+							  var $ = layui.$, active = {
+  								   	getCheckData: function(){ //获取选中数据
+  								   	var checkStatus = table.checkStatus('mytabl');
+  							      	data = checkStatus.data;
+  							      	console.log(data);
+								var ids=[];
+								data.forEach(function(index,i) {
+									ids.push(index.oid);
+								});
+								if(ids!=''){
+									$.ajax({
+										url: 'http://localhost:9527/logistics/deleteLogisticsByOid',
+										type:'post',
+										dataType:'json',
+										data:"oids="+ids,
+										success:function (datas,statusText) {
+											if(datas=='1'){
+												layer.msg('删除成功');
+												table.reload('test',{
+													where:{
+														
+													}
+												});
+											}else{
+												 layer.msg('删除失败');
+											}
+										}
+									})
+								
+								};
+							  }
+							 };
+							  
+							  //监听行工具事件
+							  table.on('tool(mytabl)', function(obj){
+								var data = obj.data;
+								//console.log(obj)
+								if(obj.event === 'del'){
+								  layer.confirm('真的删除行么', function(index){
+									var oid ={"oid": data.oid};
+									obj.del();
+									layer.close(index);
+									$.post("http://localhost:9527/logistics/updateLogistics",oid);
+								  });
+								} 
+							  });
+							  
+							  $('#demoTable').on('click', function(){
+								    var type = $(this).data('type');
+								    active[type] ? active[type].call(this) : '';
+							  });
+							});
+						}
+		//购物车
+						$("#cart").mouseenter(function(){
+				layui.use('table', function(){
+					  var table = layui.table;
+					  
+					  table.render({
+					    elem: '#test'
+					    ,url:'${pageContext.servletContext.contextPath}/customer/searchCart.action?extype=1'
+					    ,page: true
+					    ,height: 315
+					    ,toolbar: '#toolbarDemo'
+					    ,cellMinWidth: 60 //全局定义常规单元格的最小宽度，layui 2.2.1 新增
+					    ,cols: [
+					    		[
+							{type: 'checkbox', fixed: 'left'}
+						  ,{field:'exid', title:'购物车id', hide:true}
+					      ,{field:'pmodel',  align:'center',width:120, title: '型号'}
+					      ,{field:'pnnumber',   align:'center',width:60,title: '数量'}
+					      ,{field:'lame',  align:'center',width:80,title: '收件人'}
+					      ,{field:'osale', align:'center',title: '金额'}
+						   ,{fixed: 'right', title:'操作', toolbar: '#barDemo',align:'center', width:110}
+					    ]
+						  ]
+					  });
+					  
+					  table.on('tool(demo)', function(obj){ //注：tool是工具条事件名，test是table原始容器的属性 lay-filter="对应的值"
+						  var data = obj.data; //获得当前行数据
+						  var layEvent = obj.event; //获得 lay-event 对应的值（也可以是表头的 event 参数对应的值）
+						  var tr = obj.tr; //获得当前行 tr 的DOM对象
+						 
+						  if(layEvent === 'del'){ //删除
+						    layer.confirm('真的删除行么', function(index){
+						      obj.del(); //删除对应行（tr）的DOM结构，并更新缓存
+						      layer.close(index);
+						      var datas = {"exid":data.exid};
+						      $.post("${pageContext.servletContext.contextPath }/customer/deleteCart.action",datas);
+						      //向服务端发送删除指令
+						    });
+						  } else if(layEvent === 'edit'){ //编辑
+						    //do something
+						    
+						    //同步更新缓存对应的值
+						    obj.update({
+						      username: '123'
+						      ,title: 'xxx'
+						    });
+						  }
+						});
+					  
+					  table.on('toolbar(demo)', function(obj){
+						  var checkStatus = table.checkStatus(obj.config.id);
+						  console.log(checkStatus);
+						    switch(obj.event){
+						    case 'submit':
+								var data = checkStatus.data;
+								var ids=[];
+								data.forEach(function(index,i) {
+									ids.push(index.exid);
+								});
+								console.log(ids);
+								if(ids != ''){
+							    		$.ajax({
+							    			data:"lids="+ids,
+							    			url:"${pageContext.servletContext.contextPath}/customer/insertOrder.action",
+							    			success: function(result){
+							    				if(result == '1'){
+													layer.msg('提交成功');
+												}else{
+													 layer.msg('提交失败');
+												}
+							    			}
+							    		});
+									break;
+								}else{
+									layer.msg('请选择要提交的数据', {icon: 1});
+									break;
+								}
+						      case 'dell':
+						        var data = checkStatus.data;
+						        layer.msg('选中了：'+ data.length + ' 个');
+						      break;
+						    };
+						  });
+					     
+					});
+			  });
+						</script>
+					</div>
+				</div>
+				<!-- 中间容器结束 -->
+			</div>
+		<!-- 中间容器结束 -->
+	</div>
+	</div>
+</div>
+</body>
+</html>

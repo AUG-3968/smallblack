@@ -1,0 +1,216 @@
+
+<html xmlns:th=http://www.thymeleaf.org>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<link rel="stylesheet" type="text/css" th:href="@{/css/manager/logistics.css}"/>
+	<link rel="stylesheet" type="text/css" th:href="@{/css/public/top.css}"/>
+	<link rel="stylesheet" type="text/css" th:href="@{/css/public/left.css}"/>
+	<link rel="stylesheet" type="text/css" th:href="@{/plug-in/font-awesome-4.7.0/css/font-awesome.min.css}"/>
+	<link rel="stylesheet" type="text/css" th:href="@{/plug-in/layui/css/layui.css}" />
+	<script th:src="@{/js/jquery.js}" type="text/javascript" charset="utf-8"></script>
+	<script th:src="@{/plug-in/layui/layui.js}" type="text/javascript" charset="utf-8"></script>
+	<title>物流管理</title>
+	<style type="text/css">
+		.layui-hide {
+			width: 1000px;
+		}
+	</style>
+</head>
+	<body>
+	<div class="top-1">
+		<div class="top-1-1">
+			<a>京鲨科技</a>
+		</div>
+		<div class="top-1-7">
+			<div style="margin-left: 14px;margin-top: 25px;padding-bottom: 20px;">
+				<i class="fa fa-power-off" onclick="quit()"></i>
+			</div>
+		</div>
+		<div class="top-1-6" th:text="${session.use.uname}">
+		</div>
+		<div class="top-1-5">
+			<img th:src="@{${session.use.uphoto}}">
+		</div>
+	</div>
+		<!-- 主界面设置 -->
+		<div class="main">
+			<!-- 容器设置 -->
+			<div class="container">
+				<!-- 左部菜单设置 -->
+				<div class="left">
+					<ul class="left-1">
+						<div class="left-1-1">
+							<li>
+								<a th:href="@{/model2.action}"><i class="fa fa-arrow-circle-up" aria-hidden="true"></i>型号上传</a>
+							</li>
+						</div>
+						<div class="left-1-1">
+							<li>
+								<a th:href="@{/jiemian/modelmanager}"><i class="fa fa-arrow-circle-up" aria-hidden="true"></i>型号管理</a>
+							</li>
+						</div>
+						<div class="left-1-1">
+							<li>
+								<a th:href="@{/jiemian/ordermanager}"><i class="fa fa-list" aria-hidden="true"></i>订单管理</a>
+							</li>
+						</div>
+						<div class="left-1-1">							<li>
+							<a th:href="@{/jiemian/logistics}"><i class="fa fa-truck" aria-hidden="true"></i>物流管理</a>
+						</li>
+						</div>
+						<div class="left-1-1">
+							<li>
+								<a th:href="@{/jiemian/user}"><i class="fa fa-users" aria-hidden="true"></i>用户管理</a>
+							</li>
+						</div>
+					</ul>
+				</div>
+				<!-- 左部菜单结束 -->
+				<!-- 中间部分设置 -->
+				<div class="middle">
+					<!-- 添加中间模块容器 -->
+					<div class="middle-1">
+						<!--个人信息区域开始 -->
+						<div class="middle-top">
+							<p style="color: black;font-size: 22px;">物流管理</p>
+						</div>
+						<div class="middle-mid">
+							<div class="logistics">
+								<table class="layui-hide" id="test" lay-filter="test" lay-data="{id: 'usertab'}"></table>
+							</div>
+						</div>								
+						<!-- 文章管理区域结束 -->
+					</div>
+					<!-- 中间容器结束 -->
+				</div>
+				<!-- 右部容器设置 -->
+				<!-- 中间部分设置结束 -->
+			</div>
+			<!-- 容器设置结束 -->
+		</div>
+		<!-- 主界面设置结束 -->
+		<script type="text/html" id="toolbarDemo">
+		  <div class="layui-btn-container">
+			<button class="layui-btn layui-btn-sm" id="isYes" onclick="isYes()">已发货</button>
+			<button class="layui-btn layui-btn-sm" id="isNo" onclick="isNo()">未发货</button>
+			<button class="layui-btn layui-btn-sm" id="isAll" onclick="isAll()">全部信息</button>
+			<button class="layui-btn layui-btn-sm" lay-event="deleteThis">批量删除</button>
+		  	<form method="post" action="http://localhost:9527/logistics/form" id="b" enctype="multipart/form-data" style="float:left;">
+				<button type="button" class="layui-btn layui-btn-sm" id="uploadExcel" onclick="document.getElementById('i').click()">上传文件</button>
+				<input type="file"  style="display: none;" name="forms" id="i"  onchange="change()"/>
+			</form>
+		</div>
+		</script>
+		<script type="text/html" id="barDemo">
+		  <a class="layui-btn layui-btn-xs" lay-event="bsn">详情</a>
+		  <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+		</script>
+		<script type="text/javascript">
+			function change() {
+				$('#b').submit();
+			}
+		</script>
+		<script>
+		table(0,0);
+		function isYes(){
+			table(0,2);
+		}
+		function isNo(){
+			table(1,0);
+		}
+		function quit(){
+			layer.confirm('确定是否退出',{
+				  btn: ['确定','取消'] //按钮
+				}, function(){
+					window.location.href="/quit.action";
+				}, function(){
+				});
+		}
+		function isAll(){
+			table(0,0);
+		}
+		function table(isno,isyes) {
+		layui.use('table', function(){
+		  var table = layui.table;
+		  var data;
+		  table.render({
+			elem: '#test'
+			,url:'http://localhost:9527/logistics/findAllLogistic?isno='+isno+'&isyes='+isyes
+			,toolbar: '#toolbarDemo'
+			,title: '物流数据表'
+			,cols: [
+					[
+				{type: 'checkbox', fixed: 'left'}
+			  ,{field:'oid', title:'订单编号', width:100, fixed: 'left', unresize: true, sort: true, align:'center'}
+			  ,{field:'lame', title:'收件人', width:120, unresize: false, align:'center'}
+			  ,{field:'connumber', title:'联系方式', width:130, unresize: true, align:'center'}
+			  ,{field:'ladress', title:'详细地址', width:350, unresize: false, align:'center'}
+			  ,{field:'lcompany', title:'快递公司', width:150, unresize: true, align:'center'}
+			  ,{field:'lorder', title:'快递单号', width:200, sort: true, unresize: true, align:'center'}
+			  ,{fixed: 'right', title:'操作', width:150, toolbar: '#barDemo', unresize: true, align:'center'}
+			]
+			  ]
+			,page: true
+			,defaultToolbar:[]
+			,done: function(res, curr, count){
+			  //如果是异步请求数据方式，res即为你接口返回的信息。
+			  //如果是直接赋值的方式，res即为：{data: [], count: 99} data为当前页数据、count为数据总长度
+			  //console.log(res);
+			  data = res.data;
+			  //得到当前页码
+			  //console.log(curr); 
+			  //得到数据总量
+			  //console.log(count);
+			}
+		  });
+		  //头工具栏事件
+		  table.on('toolbar(test)', function(obj){
+			var checkStatus = table.checkStatus(obj.config.id);
+			switch(obj.event){
+			  case 'deleteThis':
+				var data = checkStatus.data;
+				var ids=[];
+				data.forEach(function(index,i) {
+					ids.push(index.lid);
+				});
+				if(ids!=''){
+					$.ajax({
+						url: 'http://localhost:9527/logistics/deleteLogisticsByLid.action',
+						type:'post',
+						dataType:'json',
+						data:"lids="+ids,
+						success:function (datas,statusText) {
+							if(datas=='1'){
+								layer.msg('删除成功');
+								table.reload(obj.config.id,{});
+							}else{
+								 layer.msg('删除失败');
+							}
+						}
+					})
+				}
+			  break;
+			};
+		  });
+		  //监听行工具事件
+		  table.on('tool(test)', function(obj){
+			var data = obj.data;
+			console.log(obj)
+			if(obj.event === 'del'){
+			  layer.confirm('真的删除行么', function(index){
+				obj.del();
+				layer.close(index);
+				var data={"lids":data.lid};
+				$.post("$http://localhost:9527/logistics/deleteLogistics.action",data);
+			  });
+			} else if(obj.event === 'bsn'){
+				//跳转到订单详情
+				window.location=("$http://localhost:9527/logistics/manerview/ordermanager.jsp?uoid="+data.oid);
+			}
+		  });
+		});
+		}
+		</script>
+	</body>
+</html>

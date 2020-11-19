@@ -1,0 +1,36 @@
+server:
+  port: 8003
+
+spring:
+  application:
+    name: cloud-jskj-logistics
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 192.168.6.4:1111
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://192.168.6.4:3306/jskjdiy
+    username: root
+    password: 123456
+  redis:
+    host: 127.0.0.1
+    port: 6379
+    timeout: 5000
+    password: 123
+    database: 0
+  session:
+    store-type:
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'  #监控
+feign:
+  sentinel:
+    enabled: true
+mybatis:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  mapper-locations: classpath:mapper/*Mapper.xml

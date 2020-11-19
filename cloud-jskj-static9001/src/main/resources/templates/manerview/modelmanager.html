@@ -1,0 +1,336 @@
+<html xmlns:th=http://www.thymeleaf.org>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<link rel="stylesheet" type="text/css" th:href="@{/css/manager/ordermanager.css}"/>
+	<link rel="stylesheet" type="text/css" th:href="@{/css/public/top.css}"/>
+	<link rel="stylesheet" type="text/css" th:href="@{/css/public/left.css}"/>
+	<link rel="stylesheet" type="text/css" th:href="@{/plug-in/font-awesome-4.7.0/css/font-awesome.min.css}"/>
+	<link rel="stylesheet" type="text/css" th:href="@{/plug-in/layui/css/layui.css}" />
+	<script th:src="@{/js/jquery.js}" type="text/javascript" charset="utf-8"></script>
+	<script th:src="@{/plug-in/layui/layui.js}" type="text/javascript" charset="utf-8"></script>
+</head>
+<body>
+<div class="top-1">
+	<div class="top-1-1">
+		<a>京鲨科技</a>
+	</div>
+	<div class="top-1-7">
+		<div style="margin-left: 14px;margin-top: 25px;padding-bottom: 20px;">
+			<i class="fa fa-power-off" onclick="quit()"></i>
+		</div>
+	</div>
+	<div class="top-1-6" th:text="${session.use.uname}">
+	</div>
+	<div class="top-1-5">
+		<img th:src="@{${session.use.uphoto}}">
+	</div>
+</div>
+	<div class="main">
+				<!-- 容器设置 -->
+				<div class="container">
+					<!-- 左部菜单设置 -->
+					<div class="left">
+						<ul class="left-1">
+							<div class="left-1-1">
+								<li>
+									<a th:href="@{/model2.action}"><i class="fa fa-arrow-circle-up" aria-hidden="true"></i>型号上传</a>
+								</li>
+							</div>
+							<div class="left-1-1">
+								<li>
+									<a th:href="@{/jiemian/modelmanager}"><i class="fa fa-arrow-circle-up" aria-hidden="true"></i>型号管理</a>
+								</li>
+							</div>
+							<div class="left-1-1">
+								<li>
+									<a th:href="@{/jiemian/ordermanager}"><i class="fa fa-list" aria-hidden="true"></i>订单管理</a>
+								</li>
+							</div>
+							<div class="left-1-1">							<li>
+								<a th:href="@{/jiemian/logistics}"><i class="fa fa-truck" aria-hidden="true"></i>物流管理</a>
+							</li>
+							</div>
+							<div class="left-1-1">
+								<li>
+									<a th:href="@{/jiemian/user}"><i class="fa fa-users" aria-hidden="true"></i>用户管理</a>
+								</li>
+							</div>
+						</ul>
+					</div>
+					<!-- 左部菜单结束 -->
+					<!-- 中间部分设置 -->
+					<div class="middle">
+						<!-- 添加中间模块容器 -->
+						<div class="middle-1">
+							<div class="middle-top">
+								<p style="color: black;font-size: 22px;">模具管理</p>
+							</div>
+							<div class="middle-mid">
+								<div class="model">
+									<div class="model-mid" >
+										<select id="goodstype" name="goodstype" style="width: 100px;height: 30px;">
+											<option value="0">请选择</option>
+											<c:forEach items="${goodsList1}" var="gtt">
+												<option value="${gtt.kid}">${gtt.kname}</option>
+											</c:forEach>
+										</select>
+										<select id="goodstype2" name="goodstype2" style="width: 100px;height: 30px;">
+											<option value="0">请选择</option>
+										</select>
+										<select id="goodstype3" name="goodstype3" style="width: 100px;height: 30px;">
+											<option value="0">请选择</option>
+										</select>
+										<button class="layui-btn layui-btn-sm" lay-event="" id="add" style="margin-left: 18px;margin-bottom:10px">筛选</button>
+										<script type="text/javascript">
+										function quit(){
+											layer.confirm('确定是否退出',{
+												  btn: ['确定','取消'] //按钮
+												}, function(){
+													window.location.href="/quit.action";
+												}, function(){
+												});
+										}
+											$("#goodstype").change(function() {
+												$.post("showLevelTwoSelects.action","gtid="+$("#goodstype").val(),function(data,status){
+													var json = data;
+													$("#goodstype2").empty();
+										        	var info = '<option value="0">请选择</option>';
+											        if(json.length > 0) {
+												        for(var i = 0;i<json.length;i++) {
+												        	var gt2 = json[i];
+												        	//需要重新载入的数据
+											        		info += '<option value="'+gt2.bid+'">'+gt2.pbrand+'</option>';
+												        }
+												        $("#goodstype2").append(info);
+											        }else {
+											        	//$("#goodstype2").empty();
+											        	//$("#goodstype2").append('<option value="0">请选择</option>');
+											        }
+											    });
+											});
+											$("#goodstype2").change(function() {
+												$.post("showLevelThreeSelects.action","gt2id="+$("#goodstype2").val(),function(data,status){
+													var json = data;
+													$("#goodstype3").empty();
+										        	var info = '<option value="0">请选择</option>';
+											        if(json.length > 0) {
+												        for(var i = 0;i<json.length;i++) {
+												        	var gt3 = json[i];
+												        	//需要重新载入的数据
+											        		info += '<option value="'+gt3.pid+'">'+gt3.pmodel+'</option>';
+												        }
+												        $("#goodstype3").append(info);
+											        }else {
+											        	//$("#goodstype3").empty();
+											        	//$("#goodstype3").append('<option value="0">请选择</option>');
+											        }
+											    });
+											});
+										</script>
+										<br>								
+								<table class="layui-hide" id="test" lay-filter="test"></table>
+									<script type="text/html" id="toolbarDemo">
+							  		<div class="layui-btn-container">
+									<button class="layui-btn layui-btn-sm" lay-event="deleteThis">批量删除</button>
+								  </div>	
+								</script>
+									<script type="text/html" id="barDemo">
+								  <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+								</script>
+								<script type="text/html" id="ostate1">
+	  							<!-- 这里的 checked 的状态只是演示 -->
+	  							<div name="ostate" title="订单状态" lay-filter="lockDemo"> {{ d.ostate == 1 ? '已生产' : d.ostate == 2 ? '退款中' : d.ostate == 3 ? '已退款'  : '已付款' }}</div>
+		   						</script>								
+													
+									<script>
+									table();//第一次进入table
+									$("#add").click(function(){
+										table();
+									});
+									function table(){
+									layui.use('table', function(){
+									  var table = layui.table
+									  ,form = layui.form;
+									  var data;
+									  var kind =$("#goodstype").val();
+									  var brand =$("#goodstype2").val();
+									  var phone =$("#goodstype3").val();
+									  table.render({
+										elem: '#test'
+										,cellMinWidth: 80
+										// ,overflow: auto
+										,width:800
+										,url:'http://localhost:9527/model/allmodel?kind='+kind+'&brand='+brand+'phone='+phone
+										,toolbar: '#toolbarDemo'
+										  , xhrFields: {
+											  withCredentials: true
+										  }
+										,title: '模具数据表'
+										,cols: [
+												[
+										  {type: 'checkbox', fixed: 'left'}
+
+										  ,{field:'kname', title:'材质名称', width:200,unresize: true, sort: true}
+										  ,{field:'pbrand', title:'品牌名称', width:200, edit: 'text'}
+										  ,{field:'pmodel', title:'型号名称', width:200, edit: 'text'}
+										]
+										  ]
+										,page: true
+										,done: function(res, curr, count){
+											  //如果是异步请求数据方式，res即为你接口返回的信息。
+											  //如果是直接赋值的方式，res即为：{data: [], count: 99} data为当前页数据、count为数据总长度
+											  //console.log(res);
+											  data = res.data;
+											}
+									  });
+									  
+									  //头工具栏事件
+									  table.on('toolbar(test)', function(obj){
+										var checkStatus = table.checkStatus(obj.config.id);
+										switch(obj.event){
+										 case 'deleteThis':
+												var data = checkStatus.data;
+												var ids=[];
+												data.forEach(function(index,i) {
+													ids.push(index.pid);
+												});
+												if(ids!=''){
+													$.ajax({
+														url: 'http://localhost:9527/model/deleteModelsBypids',
+														type:'post'
+															, xhrFields: {
+														withCredentials: true
+													},
+														dataType:'json',
+														data:"pids="+ids,
+														success:function (datas,statusText) {
+															if(datas=='1'){
+																layer.msg('删除成功');
+																table.reload(obj.config.id,{});
+															}else{
+																 layer.msg('删除失败');
+															}
+														}
+													})
+												}
+										  break;
+										  case 'refund':
+												var data = checkStatus.data;
+												var ids=[];
+												data.forEach(function(index,i) {
+													ids.push(index.oid);
+												});
+												if(ids!=''){
+													$.ajax({
+														url: 'http://localhost:9527/model/agreerefund.action',
+														type:'post',
+															xhrFields: {
+														withCredentials: true
+													},
+														dataType:'json',
+														data:"oids="+ids,
+														success:function (datas,statusText) {
+															if(datas=='1'){
+																layer.msg('退款成功');
+																table.reload(obj.config.id,{});
+															}else{
+																 layer.msg('退款失败');
+															}
+														}
+													})
+												}
+										  break;
+										  case 'produc':
+												var data = checkStatus.data;
+												var ids=[];
+												data.forEach(function(index,i) {
+													ids.push(index.oid);
+												});
+												if(ids!=''){
+													$.ajax({
+														url: 'http://localhost:9527/model/agreeproduc.action',
+														type:'post',
+															 xhrFields: {
+														withCredentials: true
+													},
+														dataType:'json',
+														data:"oids="+ids,
+														success:function (datas,statusText) {
+															if(datas=='1'){
+																layer.msg('生产成功');
+																table.reload(obj.config.id,{});
+															}else{
+																 layer.msg('操作失败');
+															}
+														}
+													})
+												}
+										  break;
+										  case 'produc':
+												var data = checkStatus.data;
+												var ids=[];
+												data.forEach(function(index,i) {
+													ids.push(index.oid);
+												});
+												if(ids!=''){
+													$.ajax({
+														url: 'http://localhost:9527/model/agreeproduc.action',
+														type:'post'
+															, xhrFields: {
+														withCredentials: true
+													},
+														dataType:'json',
+														data:"oids="+ids,
+														success:function (datas,statusText) {
+															if(datas=='1'){
+																layer.msg('生产成功');
+																table.reload(obj.config.id,{});
+															}else{
+																 layer.msg('操作失败');
+															}
+														}
+													})
+												}
+										  break;
+										};
+									  });
+									  
+									  //监听行工具事件
+									  table.on('tool(test)', function(obj){
+										var data = obj.data;
+										console.log(time);
+										//console.log(obj)
+										if(obj.event === 'del'){
+										  layer.confirm('真的删除行么', function(index){
+											obj.del();
+											layer.close(index);
+											var datas ={"pid":data.pid};
+											$.post("http://localhost:9527/model/deleteModelsBypid.action",datas);
+										  });
+										} else if(obj.event === 'edit'){
+										  layer.prompt({
+											formType: 2
+											,value: data.email
+										  }, function(value, index){
+											obj.update({
+											  email: value
+											});
+											layer.close(index);
+										  });
+										}
+									  });
+									});
+								}
+									</script>
+								</div>
+						</div>
+						<!-- 中间容器结束 -->
+					</div>
+				<!-- 中间容器结束 -->
+		</div>
+		</div>
+		</div>
+</body>
+</html>

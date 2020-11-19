@@ -1,0 +1,265 @@
+<html xmlns:th=http://www.thymeleaf.org>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Insert title here</title>
+	<link rel="stylesheet" type="text/css" th:href="@{/css/public/register.css}"/>
+	<script th:src="@{/plug-in/layui/jquery.min.js}" type="text/javascript" charset="utf-8"></script>
+	<script th:src="@{/plug-in/layer-v3.1.1/layer/layer.js}" type="text/javascript" charset="utf-8"></script>
+	
+</head>
+<body>
+
+		<div class="c">	
+		</div>
+		<div class="register-1">
+		</div>
+		
+		<!-- 第二块区域开始 -->
+		<div class="register-2">
+			<!-- 注册界面框开始 -->
+			<div class="register-2-1">
+				<!-- 空白DIV -->
+				<div class="register-2-1-blank">
+				</div>
+				<!-- 注册框架开始 -->
+				<form action="http://localhost:9527/ls/addUse" method="post" >
+				<div class="register-2-1-1">
+					<div class="register-2-1-blank-1">
+						Sign Up
+						</div>
+					<!-- 注册表单框架开始 -->
+					<div class="register-2-1-1-1">
+					<div class="register-2-1-blank-2">
+						</div>
+						<!-- 注册输入框架开始 -->
+						<div class="register-form-1">
+							<div class="register-form-input">
+								<input type="text"  placeholder="真实姓名" onblur="tipnullno()" name="urealname" id="no" value=""/>
+							</div>
+							<div >
+								<span class="register-tip-null" id="valinullno"></span>
+							</div>
+							<div >
+								<span class="register-tip-yzq" id="">
+								
+									<frm:errors path="userinfoValidation.urealname"></frm:errors>
+								</span>
+							</div>
+						</div>
+						<!-- 支付宝账号 -->
+						<div class="register-form-1">
+							<div class="register-form-input">
+								<input type="text"  placeholder="支付宝退款账号" onblur="yzzfb()" name="umoneryno" id="zfb" value=""/>
+							</div>
+							<div>
+								<span class="register-tip-null" id="zfberror"></span>
+							</div>
+							<div >
+								<span class="register-tip-yzq" >
+									<frm:errors path="userinfoValidation.umoneryno"></frm:errors>
+								</span>
+							</div>
+						</div>
+						<div class="register-form-1">
+							<!-- 密码输入及提示开始 -->
+							<div class="register-form-input">
+								<input type="password"  placeholder="请输入密码,字母或特殊符号或数字结合" name="upwd" id="pwd" onblur="ad()" value="${requestScope.userinfoValidation.upwd}"/>
+							</div>
+							<div>
+								<span class="register-tip-error" id="tiperror"></span>
+							</div>
+							<div >
+								<span class="register-tip-yzq" id="">
+									<frm:errors path="userinfoValidation.upwd"></frm:errors>
+								</span>
+							</div>
+							<!-- 密码输入及报空提示结束 -->
+						</div>
+						<div class="register-form-1">
+							<!-- 确认密码输入及提示开始 -->
+							<div class="register-form-input">
+								<input type="password"  placeholder="请再次输入密码" name="rpwd" id="rpwd" onblur="rad()"/>
+							</div>
+							<div >
+								<span class="register-tip-error" id="tiperrorrpwd">二次密码不一致</span>
+							</div>
+							<!-- 确认密码输入及报空提示结束 -->
+						</div>
+						<div class="register-form-1">
+							<div class="register-form-checktext">
+								<input  type="text"  placeholder="手机号" name="uno" id="yzpwd" onblur="verification()" value=""/>
+							</div>
+									<div >
+										<span class="register-tip-error" id="ver">请填入正确的手机号码</span>
+									</div>
+									<div >
+										<span class="register-tip-yzq" id="">
+											<frm:errors path="userinfoValidation.uno"></frm:errors>
+										</span>
+									</div>
+									<div >
+										<span class="register-tip-error" id="cun">手机号码已存在</span>
+									</div>
+								
+							<div >
+								<span class="register-tip-error-1" id="veri"></span>
+							</div>
+							<!-- 验证码输入及报空提示结束 -->
+						</div>
+						<div class="register-form-1">
+							<!-- 邮箱验证码输入及提示开始 -->
+							<div class="register-form-checktext">
+								<input id="phone" type="text"  placeholder="请输入验证码"  onblur="phoneCode()"/>
+							</div>
+							<div class="me">
+								<img th:src="@{http://localhost:9527/ls/getcode}" onclick="changeimg(this)">
+							</div>
+							<div class="register-form-checke">
+						</div>
+							<div >
+								<span class="register-tip-error" id="errorcode">验证码错误</span>
+							</div>
+							<!-- 邮箱验证码输入及报空提示结束 -->
+						</div>
+						<div class="register-form-agree">
+							<!-- 邮箱验证码输入及提示开始 -->
+							<div class="register-form-agree-1">
+								<input type="checkbox" id="agree" onclick="agr()" >
+								<label for="agree">
+									"已阅读并同意"
+									<a target="">服务条款</a>
+								</label>
+							</div>
+						</div>
+						<div class="register-form-1">
+							<input type="submit"  value="注册" disabled="disabled" id="y">
+						</div>
+						
+						<!-- 注册输入框架开始 -->
+					</div>
+					<!-- 注册表单框架结束 -->
+				</div>
+				<!-- 注册框架结束 -->
+
+			<!-- 注册界面框结束 -->
+
+		<!-- 第二块区域结束 -->
+		<div class="register-3">
+		</div>
+		</form>
+		<script type="text/javascript">
+		function changeimg(t){
+			t.src = "http://localhost:9527/ls/getcode?"+new Date().getTime();
+		}
+
+		
+		function agr(){
+			if($("input[type='checkbox']").is(':checked')){
+				document.getElementById("y").disabled=false;
+				document.getElementById("y").style.backgroundColor="#1AA034";
+			}else{
+				document.getElementById("y").disabled="disabled";
+				document.getElementById("y").style.backgroundColor="#D9D9D9";
+			}
+		}
+		function d(){
+			document.getElementById("code").src="http://localhost:9527/ls/Code_getcode.do?time="+new Date().getTime();
+		}
+		
+		function ad() {
+			var bool = true;
+			var p = document.getElementById("pwd").value;
+			if (""==p) {
+				bool = false;
+				document.getElementById("tiperror").innerHTML = "密码不能为空";
+				document.getElementById("tiperror").style.display ="block";
+			}else{
+				document.getElementById("tiperror").style.display ="none";
+			}
+			return bool;
+		}
+		
+		function rad() {
+			var bool = true;
+			var p = document.getElementById("pwd").value;
+			var d = document.getElementById("rpwd").value;
+			if (d!=p) {
+				bool = false;
+				document.getElementById("tiperrorrpwd").style.display ="block";
+			}else{
+				document.getElementById("tiperrorrpwd").style.display ="none";
+			}
+			return bool;
+		}
+//输入手机号		
+		function verification() {
+			var bool = true;
+			var p = document.getElementById("yzpwd").value;
+			if (""==p || p.length != 11) {
+				bool = false;
+				document.getElementById("veri").style.display ="block";
+			}else{
+				document.getElementById("veri").style.display ="none";
+			}
+			var t={};
+			t.uno = document.getElementById("yzpwd").value;
+			 $.ajax({
+				 //{"id":"2"}
+				 	type:"post",
+				 	url:'http://localhost:9527/ls/judgeuno',
+				 	data:t,
+				 	success:function(result){
+						if(result == "bu"){
+							document.getElementById("cun").style.display ="none";
+						}else{
+							document.getElementById("cun").style.display ="block";
+							bool = false;
+						}
+					}
+			    });
+			return bool;
+		}
+		
+		function tipnullno() {
+			var bool = true;
+			var no = document.getElementById("no").value;
+			if (""==no) {
+				bool = false;
+				document.getElementById("valinullno").innerHTML = "账号不能为空";
+				document.getElementById("valinullno").style.display ="block";
+			}else{
+				document.getElementById("valinullno").style.display ="none";
+			}
+			return bool;
+		}
+		
+		function tipnullname(){
+			var bool = true;
+			var name = document.getElementById("name").value;
+			if (""==name) {
+				bool = false;
+				document.getElementById("valinullname").innerHTML = "昵称不能为空";
+				document.getElementById("valinullname").style.display ="block";
+				
+			}else{
+				document.getElementById("valinullname").style.display ="none";
+			} 
+			return bool;
+		}
+		function yzzfb(){
+			var bool = true;
+			var name = document.getElementById("zfb").value;
+			if (""==name || name.length != 11) {
+				bool = false;
+				document.getElementById("zfberror").innerHTML = "请填入正确的收款号码";
+				document.getElementById("zfberror").style.display ="block";
+				
+			}else{
+				document.getElementById("zfberror").style.display ="none";
+			} 
+			return bool;
+		}
+
+		</script>
+</body>
+</html>

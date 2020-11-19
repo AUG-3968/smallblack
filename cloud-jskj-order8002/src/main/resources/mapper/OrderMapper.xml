@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper 
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jskj.order.dao.OrderMapper">
+	<select id="findAllOrder"  resultType="com.jskj.entities.OrmanaViewbean">
+	SELECT orderdetails.Oid,userinfo.Urealname,userinfo.Umoneryno,orderinfo.Osale,orderinfo.Odate,orderinfo.Ostate,logisticsinfo.Lame,contact.Connumber,logisticsinfo.Ladress,orderdetails.Pnnumber,orderdetails.Osendinfo
+	FROM userinfo,orderinfo,logisticsinfo,contact,orderdetails
+	WHERE orderinfo.Odelete='1' AND orderdetails.Oid= orderinfo.Oid  AND orderdetails.Lid=logisticsinfo.Lid AND orderdetails.Contactid=contact.Contactid AND orderinfo.`Uid`=userinfo.`Uid`
+	<if test="time != null and stime!=''">
+		AND orderinfo.odate BETWEEN #{stime} AND #{etime}
+	</if>
+	<if test="content != null and content!=''">
+		AND userinfo.`Urealname` LIKE #{content} 
+	</if>
+	<if test="uid != null and uid!=''">
+		AND userinfo.uid = #{uid} 
+	</if>
+	<if test="uoid != null and uoid!=''">
+		AND orderdetails.oid = #{uoid} 
+	</if>
+	GROUP BY orderinfo.oid ORDER BY orderinfo.`Odate` DESC 
+	</select>
+</mapper>

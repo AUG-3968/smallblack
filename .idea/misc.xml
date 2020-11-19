@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ExternalStorageConfigurationManager" enabled="true" />
+  <component name="JavaScriptSettings">
+    <option name="languageLevel" value="ES6" />
+  </component>
+  <component name="MavenProjectsManager">
+    <option name="originalFiles">
+      <list>
+        <option value="$PROJECT_DIR$/pom.xml" />
+      </list>
+    </option>
+    <option name="ignoredFiles">
+      <set>
+        <option value="$PROJECT_DIR$/ceshi1/pom.xml" />
+        <option value="$PROJECT_DIR$/ceshi2/pom.xml" />
+        <option value="$PROJECT_DIR$/cloud-jskj- logistics9003/pom.xml" />
+        <option value="$PROJECT_DIR$/cloud-jskj-common/pom.xml" />
+        <option value="$PROJECT_DIR$/cloud-jskj-configcenter3344/pom.xml" />
+        <option value="$PROJECT_DIR$/cloud-jskj-configceter9006/pom.xml" />
+        <option value="$PROJECT_DIR$/cloud-jskj-model/pom.xml" />
+        <option value="$PROJECT_DIR$/cloud-jskj-static/pom.xml" />
+        <option value="$PROJECT_DIR$/cloud-jskj-util/pom.xml" />
+        <option value="$PROJECT_DIR$/cloud-jskj.centerconfig9006/pom.xml" />
+        <option value="$PROJECT_DIR$/could-jskj-order9002/pom.xml" />
+      </set>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/out" />
+  </component>
+</project>

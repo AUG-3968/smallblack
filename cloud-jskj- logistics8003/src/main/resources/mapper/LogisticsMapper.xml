@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper 
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jskj.logistics.dao.LogisticsMapper">
+	<select id="findlogistics" resultType="com.jskj.entities.LogisticsAndContactAndOrderinfoAndOrderdetails">
+		SELECT DISTINCT l.oid,o.odate,l.lame,c.connumber,l.ladress,l.lcompany,l.lorder,od.tbid FROM logisticsinfo l LEFT JOIN contact c ON l.contactid=c.Contactid LEFT JOIN orderinfo o ON l.oid=o.Oid LEFT JOIN orderdetails od ON l.Oid=od.oid 
+		WHERE Ldelete=1
+		<if test="time != null and stime != '' ">
+			and o.odate between #{stime} and #{etime}
+		</if> 
+		<if test="content != null and content != '' ">
+			and l.oid like #{content} 
+			or l.lame like #{content}
+			or c.connumber like #{content}
+			or l.ladress like #{content}
+			or l.lcompany like #{content}
+			or l.lorder like #{content}
+			or od.tbid like #{content}
+		</if>
+		and o.uid=#{uid} order by o.odate desc limit #{arg0},#{arg1}
+	</select>
+</mapper>

@@ -1,0 +1,137 @@
+<html xmlns:th=http://www.thymeleaf.org>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Insert title here</title>
+	<link rel="stylesheet" type="text/css" th:href="@{/css/public/top.css}"/>
+	<link rel="stylesheet" th:href="@{/plug-in/layui/css/layui.css}" media="all">
+	<script type="text/javascript" th:src="@{/plug-in/jquery.min.js}"></script>
+	<script th:src="@{/plug-in/layui/layui.js}" type="text/javascript" charset="utf-8"></script>
+</head>
+<body>
+
+		<div class="top-1">
+			<div class="top-1-1">
+				<a>京鲨科技</a>
+			</div>
+			<div style="float: right; margin-right: 200px;line-height: 68px;">
+				<button class="layui-btn">登录</button>
+			</div>
+		</div>
+		<div style="height: 600px; width: 600px; margin: 50px 0 0 470px;">
+			<h1 style="margin-bottom: 30px">找回密码</h1>
+			<form class="layui-form" action="/findUserpwd.action">
+			  <div class="layui-form-item">
+				<label class="layui-form-label">账号</label>
+				<div class="layui-input-block">
+				  <input id="use" type="text" name="uno" required  lay-verify="required" placeholder="请输入账号" autocomplete="off" class="layui-input" onblur="yzUse(this)">
+				</div>
+				<div style="display: none;color: red;" id="id" class="layui-form-mid layui-word-aux">账号不存在</div>
+
+			  </div>
+			  <div class="layui-form-item">
+				  <label class="layui-form-label">退款账号</label>
+				  <div class="layui-input-block">
+					<input id="phone" type="text" name="umoneryno" required  lay-verify="required" placeholder="请输入退款账号" autocomplete="off" class="layui-input" onblur="yzPhone(this)">
+				  </div>
+				  <div id="phoneerror" style="display: none;" class="layui-form-mid layui-word-aux">退款账号错误</div>
+			  </div>
+			  <div class="layui-form-item">
+				<label class="layui-form-label">密码框</label>
+				<div class="layui-input-inline">
+				  <input id="pwd" type="password" name="upwd" required lay-verify="required" placeholder="请输入密码" autocomplete="off" class="layui-input" onblur="pwd()">
+				</div>
+				<div id="pwderror" class="layui-form-mid layui-word-aux">密码必须是6-12位</div>
+			  </div>
+			  
+			  <div class="layui-form-item">
+				<div class="layui-input-block">
+				  <button class="layui-btn" lay-submit lay-filter="formDemo">立即提交</button>
+				  <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+				</div>
+			  </div>
+			</form>
+	
+			<script>
+				function pwd(){
+					var bool = true;
+					var c = document.getElementById("pwderror").style.display;
+					if(c == "block"){
+						bool = false;
+					}
+					var b = $('#pwd').val();
+					var up = /^\w{6,12}$/;
+					if(up.test(b)){
+						return bool;
+					}else{
+						document.getElementById("pwderror").style.display ="block";
+						bool = false;
+					}
+				}
+				function yzUse(y){
+					var bool = true;
+					var b = document.getElementById("id").style.display;
+					if(b == "block"){
+						bool = false;
+					}
+					var t = {};
+					t.uno = document.getElementById("use").value;
+					 $.ajax({
+						 //{"id":"2"}
+						 	type:"post",
+						 	url:'/judgeuno.action',
+						 	data:t,
+						 	success:function(result){
+								if(result == "bu"){
+									document.getElementById("id").style.display ="block";
+									bool = false;
+								}else{
+									document.getElementById("id").style.display ="none";
+								}
+							}
+					    });
+					return bool;
+				}
+				function yzPhone(ph){
+					var bool = true;
+					var b = document.getElementById("phoneerror").style.display;
+					if(b == "block"){
+						bool = false;
+					}
+					var t = {};
+					t.umoneryno = ph.value;
+					t.uno = document.getElementById("use").value;;
+					 $.ajax({
+						 //{"id":"2"}
+						 	type:"post",
+						 	url:'/judgerefund.action',
+						 	data:t,
+						 	success:function(result){
+								if(result == "bu"){
+									document.getElementById("phoneerror").style.display ="block";
+									bool = false;
+								}else{
+									document.getElementById("phoneerror").style.display ="none";
+								}
+							}
+					    });
+					return bool;
+				}
+			//Demo
+				layui.use('form', function(){
+				  var form = layui.form;
+				  
+				  //监听提交
+				  form.on('submit(formDemo)', function(data){
+					if(pwd() && yzUse(y) && yzPhone(y)){
+						return true;
+					}else{
+						console.log("失败");
+						return false;
+					}
+				  });
+				});
+			</script>
+			
+		</div>
+</body>
+</html>

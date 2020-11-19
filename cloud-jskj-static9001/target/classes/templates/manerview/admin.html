@@ -1,0 +1,306 @@
+<html xmlns:th=http://www.thymeleaf.org>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<link rel="stylesheet" type="text/css" th:href="@{/css/manager/admin.css}"/>
+	<link rel="stylesheet" type="text/css" th:href="@{/css/public/top.css}"/>
+	<link rel="stylesheet" type="text/css" th:href="@{/css/public/left.css}"/>
+	<link rel="stylesheet" type="text/css" th:href="@{/plug-in/font-awesome-4.7.0/css/font-awesome.min.css}"/>
+	<link rel="stylesheet" type="text/css" th:href="@{/plug-in/layui/css/layui.css}" />
+	<script th:src="@{/plug-in/jquery.min.js}" type="text/javascript" charset="utf-8"></script>
+	<script th:src="@{/plug-in/layui/layui.js}" type="text/javascript" charset="utf-8"></script>
+<title>管理员管理</title>
+		<style type="text/css">
+			.layui-hide {
+				width: 1000px;
+			}
+			.admin-add-table {
+				width:500px; 
+				margin: auto;
+				border-width: 1px;
+				border-width:1px solid #EEEEEE;
+				margin-top:30px;
+			}
+			.admin-add-tbody>tr {
+				float: left;
+			}
+			.admin-add-tbody>tr>td>input {
+				float: left;
+				width: 220px;
+				height: 28px;
+				border:0;
+				border-radius: 4px;
+				border:1px solid #cccccc;
+				font-size: 15px;
+				background-color: #F5F5F5;
+				padding-left: 10px;
+			}
+			.admin-add-tbody>tr>td>select {
+				float: left;
+				width: 230px;
+				height: 32px;
+				border-radius: 4px;
+				border:1px solid #cccccc;
+				font-size: 15px;
+				background-color: #F5F5F5;
+			}
+			.admin-add-td {
+				width: 120px;
+				height: 35px;
+				float: left;
+				text-align: right;
+				padding-top: 5px;
+				margin-left: 10px;
+				margin-bottom: 10px;
+			}
+		</style>
+	</head>
+	<body>
+	<div class="top-1">
+		<div class="top-1-1">
+			<a>京鲨科技</a>
+		</div>
+		<div class="top-1-7">
+			<div style="margin-left: 14px;margin-top: 25px;padding-bottom: 20px;">
+				<i class="fa fa-power-off" onclick="quit()"></i>
+			</div>
+		</div>
+		<div class="top-1-6" th:text="${session.use.uname}">
+		</div>
+		<div class="top-1-5">
+			<img th:src="@{${session.use.uphoto}}">
+		</div>
+	</div>
+		<!-- 主界面设置 -->
+		<div class="main">
+			<!-- 容器设置 -->
+			<div class="container">
+				<!-- 左部菜单设置 -->
+				<div class="left">
+					<ul class="left-1">
+						<div class="left-1-1">
+							<li>
+								<a th:href="@{/model2.action}"><i class="fa fa-arrow-circle-up" aria-hidden="true"></i>型号上传</a>
+							</li>
+						</div>
+						<div class="left-1-1">
+							<li>
+								<a th:href="@{/jiemian/modelmanager}"><i class="fa fa-arrow-circle-up" aria-hidden="true"></i>型号管理</a>
+							</li>
+						</div>
+						<div class="left-1-1">
+							<li>
+								<a th:href="@{/jiemian/ordermanager}"><i class="fa fa-list" aria-hidden="true"></i>订单管理</a>
+							</li>
+						</div>
+						<div class="left-1-1">							<li>
+							<a th:href="@{/jiemian/logistics}"><i class="fa fa-truck" aria-hidden="true"></i>物流管理</a>
+						</li>
+						</div>
+						<div class="left-1-1">
+							<li>
+								<a th:href="@{/jiemian/user}"><i class="fa fa-users" aria-hidden="true"></i>用户管理</a>
+							</li>
+						</div>
+					</ul>
+				</div>
+				<!-- 左部菜单结束 -->
+				<!-- 中间部分设置 -->
+				<div class="middle">
+					<!-- 添加中间模块容器 -->
+					<div class="middle-1">
+						<!--个人信息区域开始 -->
+						<div class="middle-top">
+							<p style="color: black;font-size: 22px;">管理员管理</p>
+						</div>
+						<div class="middle-mid">
+							<div class="admin">
+								<table class="layui-hide" id="test" lay-filter="test"></table>
+							</div>
+						</div>								
+						<!-- 管理员管理区域结束 -->
+					</div>
+					<!-- 中间容器结束 -->
+				</div>
+				<!-- 右部容器设置 -->
+				<!-- 中间部分设置结束 -->
+			</div>
+			<!-- 容器设置结束 -->
+		</div>
+		<!-- 主界面设置结束 -->
+		<script type="text/html" id="toolbarDemo">
+		  <div class="layui-btn-container">
+			<button class="layui-btn layui-btn-sm" lay-event="addAdmin">新增管理员</button>
+		  </div>
+		</script>
+		<script type="text/html" id="barDemo">
+		  <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+		</script>
+		<script type="text/html" id="grade">
+	  		<!-- 这里的 checked 的状态只是演示 -->
+	  		<div name="ugrade" title="用户等级" lay-filter="lockDemo"> {{ d.ugrade == 2 ? '普通管理员' : '高级管理员' }}</div>
+		</script>
+		<script>
+			layui.use('table', function(){
+			  var table = layui.table;
+			  var data;
+			  table.render({
+				elem: '#test'
+				,url:'http://localhost:9527/user/findAdminAndMoney'
+				,title: '管理员数据表'
+				,toolbar: '#toolbarDemo'
+				,cols: [
+						[
+				  {field:'uno', title:'用户账号', width:180, fixed: 'left', unresize: true, sort: true, align:'center'}
+				  ,{field:'urealname', title:'用户名称', width:180, unresize: true, align:'center'}
+				  ,{field:'ugrade', title:'用户等级', width:180, unresize: true, align:'center', templet: '#grade'}
+				  ,{fixed: 'right', title:'操作', toolbar: '#barDemo', unresize: true, align:'center'}
+				]
+				  ]
+				,page: true
+				,width: 780
+				,defaultToolbar:[]
+				,done: function(res, curr, count){
+				  //如果是异步请求数据方式，res即为你接口返回的信息。
+				  //如果是直接赋值的方式，res即为：{data: [], count: 99} data为当前页数据、count为数据总长度
+				  //console.log(res);
+				  data = res.data;
+				  //得到当前页码
+				  //console.log(curr); 
+				  //得到数据总量
+				  //console.log(count);
+				}
+			  });
+			//头工具栏事件
+			//触发事件
+			table.on('toolbar(test)', function(obj){
+				var checkStatus = table.checkStatus(obj.config.id);
+				switch(obj.event){
+				  case 'addAdmin':
+					//示范一个公告层
+				      layer.open({
+				        type: 1
+				        ,title:  ['添加管理员', 'font-size:16px;'] 
+				        ,closeBtn: 1
+				        ,area: ['500px', '400px']
+				        ,shade: 0.8
+				        ,id: 'LAY_layuipro' //设定一个id，防止重复弹出
+				        ,btn: ['确认添加', '取消']
+				        ,btnAlign: 'c'
+				        ,moveType: 1 //拖拽模式，0或者1
+				        ,content: '<table class="admin-add-table">'
+							+'<tbody class="admin-add-tbody">'
+							+'<tr><td class="admin-add-td">用户账号 : &nbsp;</td><td>'
+							+'<input type="text" id="tbuno"/>'
+							+'<div style="display:none;color:red;margin-left:5px;" id="vaildno">账号只能是三位以上的数字字母下划线</div></td></tr>'
+							+'<tr><td class="admin-add-td" >用户密码 : &nbsp;</td>'
+							+'<td><input type="password" id="tbupwd"/>'
+							+'<div style="display:none;color:red;margin-left:5px;" id="vaildpwd">密码不能为空</div></td>'
+							+'</tr><tr><td class="admin-add-td">确认密码 : &nbsp;</td>'
+							+'<td><input type="password" id="urpwd"/>'
+							+'<div style="display:none;color:red;margin-left:5px;" id="vaildrpwd">密码前后不一致</div></td>'
+							+'</tr>'
+							+'<tr>'
+							+'<td class="admin-add-td">真实姓名 : &nbsp;</td>'
+							+'<td><input type="text" id="tburealname"/>'
+							+'<div class="d-2-3" id="uRName"></div></td>'
+							+'</tr>'
+							+'<tr>'
+							+'<td class="admin-add-td">选择等级 : &nbsp;</td>'
+							+'<td>'
+							+'	<select id="tbugrade">'
+							+'		<option value ="2">普通管理员</option>'
+							+'		<option value ="3">高级管理员</option>'
+							+'	</select>'
+							+'</td>'
+							+'</tr>'
+							+'</tbody>'
+							+'</table>'
+				        ,success: function(layero){
+				          var btn = layero.find('.layui-layer-btn');
+				          btn.find('.layui-layer-btn0').attr({
+				            	//确认添加
+				          });
+				        }
+				      	,yes: function(index, layero){
+				    	  //do something
+				    	  var urpwd = $('#urpwd').val();
+						  var upwd = $('#tbupwd').val();
+						  var tbuno = $('#tbuno').val();
+						  var no = /^[a-zA-Z0-9_]{3,}$/;
+						  var bool = true;
+						  if(!no.test(tbuno)) {
+							  document.getElementById("vaildno").style.display="block";
+							  bool=false;
+						  }else{
+							  document.getElementById("vaildno").style.display="none";
+						  }
+						  if(upwd != urpwd) {
+							  document.getElementById("vaildrpwd").style.display="block";
+							  bool=false;
+						  }else{
+							  document.getElementById("vaildrpwd").style.display="none";
+						  }
+						  if("" == upwd) {
+							  document.getElementById("vaildpwd").style.display="block";
+							  bool=false;
+						  }else{
+							  document.getElementById("vaildrpwd").style.display="none";
+						  }
+						  if(bool) {
+							  layer.close(index);
+					    	  var datas = {"uno":$('#tbuno').val(),"upwd":$('#tbupwd').val(),"urealname":$('#tburealname').val(),"ugrade":$('#tbugrade').val()};
+					    	  $.ajax({
+									url: '${pageContext.servletContext.contextPath }/addAdmin.action',
+									type:'post',
+									dataType:'json',
+									data:datas,
+									success:function (datas,statusText) {
+										if(datas=='1'){
+											layer.msg('新增成功！');
+											table.reload(obj.config.id,{});
+										}else{
+											 layer.msg('账号已存在，新增失败！');
+										}
+									}
+							   })
+						  }
+				      	}
+				      });
+				  break;
+				}
+			})
+			  //监听行工具事件
+			  table.on('tool(test)', function(obj){
+				var data = obj.data;
+				//console.log(obj)
+				if(obj.event === 'del'){
+				  layer.confirm('真的删除行么', function(index){
+					obj.del();
+					layer.close(index);
+					var datas = {"uid":data.uid};
+					$.post("${pageContext.servletContext.contextPath }/deleteUser.action",datas);
+				  });
+				}
+			  });
+			});
+			$("#urpwd").blur(function(){
+				var urpwd = $(this).val();
+				var upwd = $('#tbupwd').val();
+				if(upwd != uepwd) {
+					$('#vaildpwd').style.display=block;
+					console.log($('#vaildpwd').style.display);
+				}
+				layer.alert(_this.val());
+				})
+				function quit(){
+			layer.confirm('确定是否退出',{
+				  btn: ['确定','取消'] //按钮
+				}, function(){
+					window.location.href="/quit.action";
+				}, function(){
+				});
+		}
+		</script>
+	</body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<script src="js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="layer-v3.1.1/layer/layer.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<a href="#" onclick="aa()">弹出消息框</a>
+		<a href="#" onclick="a()">弹出提示框</a>
+		<a href="#" onclick="b()">弹出确认框</a>
+		<a href="#" onclick="c()">弹出窗口</a>
+		<script type="text/javascript">
+			function aa(){
+				layer.msg('删除成功',{icon:0}); //0-6
+			}
+			
+			function a(){
+				//layer.alert("你好");
+				//layer.alert("内容",{title:'标题信息',icon:0});
+				layer.alert("内容",{title:'标题信息',icon:1});
+				//layer.alert("内容",{title:'标题信息',icon:2});
+				//layer.alert("内容",{title:'标题信息',icon:3});
+				//layer.alert("内容",{title:'标题信息',icon:4});
+				//layer.alert("内容",{title:'标题信息',icon:5});
+				//layer.alert("内容",{title:'标题信息',icon:6});
+			}
+			
+			function b(){
+				layer.confirm('您确定要执行删除操作？', {
+				  btn: ['确定','取消'] //按钮
+				}, function(){
+				  //确定后要做的事情
+				  
+				  layer.msg('删除成功', {icon: 1});
+				}, function(){
+				  //取消后要做的事情
+				});
+			}
+			
+			function c(){
+				layer.open({
+				  type: 1,
+				  area: ['420px', '240px'], //宽高
+				  maxmin: true,
+				  content: '页面内容'
+				});
+				
+			}
+		</script>
+	</body>
+</html>

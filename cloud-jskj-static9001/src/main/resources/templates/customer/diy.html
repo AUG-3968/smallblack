@@ -1,0 +1,729 @@
+<html xmlns:th=http://www.thymeleaf.org>
+	<head>
+		<meta charset="utf-8">
+		<link rel="stylesheet" type="text/css" th:href="@{/css/public/left.css}"/>
+		<link rel="stylesheet" type="text/css" th:href="@{/css/public/top.css}"/>
+		<link rel="stylesheet" type="text/css" th:href="@{/plug-in/font-awesome-4.7.0/css/font-awesome.min.css}"/>
+		<link rel="stylesheet" th:href="@{/css/customer/diy.css}">
+		<link rel="stylesheet" th:href="@{/plug-in/layui/css/layui.css}">
+		<script th:src="@{/js/jquery.js}" type="text/javascript" charset="utf-8"></script>
+		<script th:src="@{/plug-in/layui/layui.js}" type="text/javascript" charset="utf-8"></script>
+
+		<title></title>
+	</head>
+		<body>
+		<!-- 顶部界面设置开始 -->
+		<div class="top-1">
+			<div class="top-1-1">
+				<a>京鲨科技</a>
+			</div>
+			<div class="top-1-7">
+				<div style="margin-left: 14px;margin-top: 25px;padding-bottom: 20px;">
+					<i class="fa fa-power-off" onclick="quit()"></i>
+				</div>
+			</div>
+			<div class="top-1-7" th:if="${#lists.isEmpty(session.message)}">
+				<div style="margin-left: 14px;margin-top: 25px;padding-bottom: 20px;"><i class="fa fa-bell"></i></div>
+				<div class="jd-b-1-8-1">
+
+					<div style="height: 300px; width: 320px;background-color: white;border-bottom: 1px solid #DEE1E6;overflow: auto;color: black;">
+						消息
+							<div style="height: 70px;padding:10px 20px 0 20px ;border-bottom: 1px solid #DEE1E6;" th:each="m:${session.message}">
+								<div style="font-size: 10px;background-color: #DEE1E6;text-align: center;border-radius: 3px;" th:text="${m.mtime}"></div>
+								<div style="float: left;height: 57px;">
+									<img src="@{/img/head.jpg}" style="height: 40px; border-radius: 10px;" />
+								</div> 
+								<div style=" float: left;font-size: 14px;margin-left: 10px;width: 200px;">
+									<div>鲸鲨</div>
+								</div>
+								<div style="float: left;font-size: 10px;width: 200px;margin-left: 10px;margin-top: 10px; cursor:pointer;" onclick="mess(${m.mis})">
+									<div th:text="${m.mcontent}">$</div>
+								</div>
+							</div>
+					</div>
+					<!--全部页面 -->
+					<div style="height: 50px; color:black">
+						<div style="float: left;font-size: 12px; line-height: 50px;margin-right: 20px;cursor:pointer;" onclick="haveread()">一键已读</div>
+					
+					</div>
+				</div>
+				<!-- 无消息 -->
+
+			</div>
+			<div class="top-1-7">
+				<div style="margin-left: 14px;margin-top: 25px;padding-bottom: 20px;"  id="cart">
+					<i class="fa fa-shopping-cart" ></i>
+				</div>
+				<div class="jd-b-1-8-2">
+					<p style="color: #000000;font-size: 16px;margin: 2px 0px 0px 5px;">
+						购物车
+					</p>
+					<div style="width: 540px;margin: 4px 0px 0px 5px;">
+						<table class="layui-hide" id="test"  lay-filter="demo"></table>
+					</div>
+				</div>
+			</div>
+			<div class="top-1-6" th:text="${session.use.uname}">
+
+			</div>
+			<div class="top-1-5">
+				<img th:src="@{${session.use.uphoto}}">
+			</div>
+
+		</div>
+		<!-- 顶部界面结束 -->
+		<!-- 主界面设置 -->
+		<div class="main">
+			<!-- 容器设置 -->
+			<div class="container">
+				<!-- 左部菜单设置 -->
+					<div class="left">
+					<ul class="left-1">
+						<div class="left-1-1">
+							<li>
+								<a th:href="@{/jiemian/diy}"><i class="fa fa-comments-o fa-lg" aria-hidden="true"></i>Diy订制</a>
+							</li>
+						</div>
+
+						<div class="left-1-1">
+							<li>
+								<a th:href="@{/jiemian/batch}"><i class="fa fa-file-word-o fa-lg" aria-hidden="true"></i>批量定制</a>
+							</li>							
+						</div>
+						<div class="left-1-1">
+							<li>
+								<a th:href="@{/jiemian/getOrdermess}"><i class="fa fa-database fa-lg" aria-hidden="true"></i>订单管理</a>
+							</li>
+						</div>
+						<div class="left-1-1">
+							<li>
+								<a th:href="@{/jiemian/getWuliumess}"><i class="fa fa-user-plus fa-lg" aria-hidden="true"></i>物流信息</a>
+							</li>							
+						</div>
+						<div class="left-1-1">
+							<li>
+								<a th:href="@{/jiemian/findMyinformation}"><i class="fa fa-heart fa-lg" aria-hidden="true"></i>我的信息</a>
+							</li>							
+						</div>
+						<div class="left-1-1">
+							<li>
+								<a><i class="fa fa-star fa-lg" aria-hidden="true"></i>使用说明</a>
+							</li>							
+						</div>
+					</ul>
+				</div>
+				<!-- 左部菜单结束 -->
+				<!-- 中间部分设置 -->
+				<div class="middle">
+					<!-- 添加中间模块容器 -->
+					<div class="middle-1">
+						<!--个人信息区域开始 -->
+						<div class="middle-top">
+							<p style="color: black;font-size: 22px;">DIY定制</p>
+						</div>												
+							<form class="layui-form">
+							<div class="layui-col-xs5">
+							  <div class="grid-demo grid-demo-bg1">
+								  <ul style="margin: 10px 0px 0px 20px;">
+								  	<li>
+										<label style="font-size: 18px;">订单识别</label>
+									</li>
+									<li style="margin-top: 4px;padding: 2px 5px;">
+										<textarea id="discerntext" name="" placeholder="请输入内容      姓名|手机号码|省|市|县|详细地址|备注(以”|“分开)" class="layui-textarea" style="resize: none;"></textarea>
+									</li>
+									<li style="margin-top: 4px;">
+										<button id="discern" type="button" class="layui-btn layui-btn-lg" style="float: right;margin-right: 10px;">点击识别</button>
+									</li>
+									<li style="margin-top: 4px;clear: both;">
+										<label style="font-size: 18px;">识别结果</label>
+									</li>
+		
+									<li style="margin: 4px 0px 0px 4px;">
+										<div class="layui-row">
+											<div class="layui-col-xs6">
+												 <div class="layui-form-item">
+													<label class="layui-form-label" style="text-align: center;">收件人：</label>
+													<div class="layui-input-block">
+													  <input type="text" id="shoujianren" name="lame" required  lay-verify="required" autocomplete="off" class="layui-input">
+													</div>
+												 </div>
+											</div>
+											<div class="layui-col-xs6">
+											  <div class="grid-demo">
+												  <div class="layui-form-item">
+												  	<label class="layui-form-label" style="text-align: center;">联系电话：</label>
+												  	<div class="layui-input-block">
+														<input type="text" id="phone"name="connumber" required  lay-verify="required" autocomplete="off" class="layui-input">
+												  	</div>
+												  </div>
+											  </div>
+											</div>
+										 </div>
+									</li>
+									<li style="margin-top: 4px;">
+										<div class="layui-row">
+											<div class="layui-col-xs6">
+												 <div class="layui-form-item">
+													<label class="layui-form-label" style="text-align: center;">省区：</label>
+													<div class="layui-input-block">
+													  <input type="text" id="sheng"name="province" required  lay-verify="required" autocomplete="off" class="layui-input">
+													</div>
+												 </div>
+											</div>
+											<div class="layui-col-xs6">
+											  <div class="grid-demo">
+												  <div class="layui-form-item">
+												  	<label class="layui-form-label" style="text-align: center;">市区：</label>
+												  	<div class="layui-input-block">
+														<input type="text" id="shi"name="city" required  lay-verify="required" autocomplete="off" class="layui-input">
+												  	</div>
+												  </div>
+											  </div>
+											</div>
+										 </div>
+									</li>
+									<li style="margin-top: 4px;">
+										<div class="layui-row">
+											<div class="layui-col-xs9">
+												 <div class="layui-form-item">
+													<label class="layui-form-label" style="text-align: center;">县区：</label>
+													<div class="layui-input-block">
+													  <input type="text" id="xian" name="county" required  lay-verify="required" autocomplete="off" class="layui-input">
+													</div>
+												 </div>
+											</div>
+										 </div>
+									</li>
+									<li style="margin-top: 4px;">
+										<div class="layui-row">
+											<div class="layui-col-xs12">
+												 <div class="layui-form-item">
+													<label class="layui-form-label" style="text-align: center;">详细地址：</label>
+													<div class="layui-input-block">
+													  <input type="text" id="xiangxi"name="ladress" required  lay-verify="required" autocomplete="off" class="layui-input">
+													</div>
+												 </div>
+											</div>
+										 </div>
+									</li>
+									<li style="margin-top: 4px;">
+										<div class="layui-row">
+											<div class="layui-col-xs12">
+												 <div class="layui-form-item">
+													<label class="layui-form-label" style="text-align: center;">备注：</label>
+													<div class="layui-input-block">
+													  <input type="text" id="remark"name="oremark" required  lay-verify="required" autocomplete="off" class="layui-input">
+													</div>
+												 </div>
+											</div>
+										 </div>
+									</li>
+									<li style="margin-top: 4px;clear: both;">
+										<label style="font-size: 18px;">赠品选择</label>
+									</li>
+									<li style="margin-top: 4px;clear: both;">
+										<div class="layui-col-xs6" style="color:black;padding:5px 0px 0px 60px">
+												<input type="checkbox"  title="挂绳"  lay-filter="sling">							
+										</div>
+										<div class="layui-col-xs6" style="color:black;">
+												<div class="layui-col-xs4">
+										  			 <button id="minus"type="button" class="layui-btn layui-btn-sm" style="float: right;">-</button>
+												</div>
+												<div class="layui-col-xs4">
+										  			 <input id="number" type="text" name="slingnumber" required lay-verify="required" autocomplete="off" class="layui-input" style="height:30px;padding-left:20px" disabled="disabled"> 
+												</div>
+												<div class="layui-col-xs4" >
+										  			 <button id="add" type="button" class="layui-btn layui-btn-sm">+</button>
+												</div>								
+										</div>
+										
+									</li>
+									<li style="margin-top: 4px;clear: both;">
+										<div class="layui-col-xs6" style="color:black;padding:5px 0px 0px 60px">
+											<input type="checkbox"  title="支架"  lay-filter="holder"> 					
+										</div>	
+										<div class="layui-col-xs6" style="color:black;">
+												<div class="layui-col-xs4">
+										  			 <button id="minus2"type="button" class="layui-btn layui-btn-sm" style="float: right;">-</button>
+												</div>
+												<div class="layui-col-xs4">
+										  			 <input id="number2" type="text" name="holdernumber" required lay-verify="required|number" autocomplete="off" class="layui-input" style="height:30px;padding-left:20px"> 
+												</div>
+												<div class="layui-col-xs4" >
+										  			 <button id="add2" type="button" class="layui-btn layui-btn-sm">+</button>
+												</div>								
+										</div>		
+									</li>
+								  </ul>
+							  </div>
+							</div>
+							<div class="layui-col-xs7">
+							  <div class="grid-demo">
+								  <ul style="margin: 10px 0px 0px 20px;">
+								  	<li>
+										<label style="font-size: 18px;">手机配件选择</label>
+									</li>
+									<li style="margin: 4px 0px 0px 10px;overflow:hidden">
+											<div class="layui-col-xs6">
+												 <button type="button" class="layui-btn layui-btn-xs" id="xuanzhe" style="float:left;">手机型号</button>
+												 <ul style="float: left;margin:0px;display:none;" id="xuanzhe1">
+												 </ul>
+												 <ul style="float: left;margin:0px;display:none;" id="xuanzhe2">
+												 </ul>
+												 <ul style="float: left;margin:0px;display:none;" id="xuanzhe3">
+												 </ul>
+											</div>
+											<div class="layui-col-xs6">
+											  
+												 <div style="width: 200px;float: left;">
+													<input type="text" placeholder="请输入手机型号" autocomplete="off" class="layui-input" style="height: 30px;">
+												</div>
+												<button type="button" class="layui-btn layui-btn-sm" style="float: right;">搜索手机型号</button>
+											  
+											</div>
+									</li>
+									<li style="margin: 4px 0px 0px 10px;">
+										<div class="layui-col-xs10">
+										   <div id="muju" class="grid-demo grid-demo-bg1" style="width:533px;height:500px;border:2px solid #000;display:table-cell;vertical-align:middle;text-align: center;">6/12</div>
+										</div>
+										<div class="layui-col-xs2">
+										   <ul style="margin:4px 0px 0px 2px">
+										   		<li style="margin:100px 0px 0px 14px">
+										   			<div class="layui-upload">
+  														<button type="button" class="layui-btn" id="upload" disabled="true">上传图片</button>
+										   			</div>
+										   		</li>
+										   		<li style="margin:100px 0px 0px 10px;overflow:hidden">
+										   			<div class="layui-col-xs4">
+										  				 <button id="minus1" type="button" class="layui-btn layui-btn-sm" style="float: right;">-</button>
+													</div>
+													<div class="layui-col-xs4">
+										  				 <input id="number1" type="text" name="pnnumber" required lay-verify="required|number" autocomplete="off" class="layui-input" style="height:30px;"> 
+													</div>
+													<div class="layui-col-xs4" >
+										  				 <button id="add1" type="button" class="layui-btn layui-btn-sm">+</button>
+													</div>
+										   		</li>
+										   		<li style="margin:100px 0px 0px 14px">
+										   				<input type="text"  id="osale" name="osale" autocomplete="off" class="layui-input">
+										   		</li>
+										   		<li style="margin:100px 0px 0px 14px">
+										   				 <input type="hidden"  id="imginput" name="photosrc" autocomplete="off" class="layui-input">
+										   				 <input type="hidden"  id="phoneid" name="pid" autocomplete="off" class="layui-input">
+										  				 <button type="button" class="layui-btn layui-btn-sm" lay-submit lay-filter="*">加入购物车</button>
+										   		</li>
+										   </ul>
+										   
+										</div>	
+									</li>
+								  </ul>
+							  </div>
+							</div>
+						 </form>
+						<!-- 文章管理区域结束 -->
+					</div>
+					<!-- 中间容器结束 -->
+				</div>
+				<!-- 中间容器结束 -->
+				<!-- 右部容器设置 -->
+				</div>
+				<script type="text/html" id="toolbarDemo">
+  					<div class="layui-btn-container">
+    					<button class="layui-btn layui-btn-sm" lay-event="submit">结算</button>
+ 					 </div>
+				</script>
+				<script type="text/html" id="barDemo">
+
+  					<a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+ 					 <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+
+				</script>
+			<!-- 容器设置结束 -->
+		</div>
+		<img  th:src="@{newPath}">
+		<script type="text/javascript">
+			function quit(){
+				layer.confirm('确定是否退出',{
+					  btn: ['确定','取消'] //按钮
+					}, function(){
+						window.location.href="/quit.action";
+					}, function(){
+					});
+			}
+			$("#number").val(0);
+			$("#number1").val(1);
+			$("#number2").val(0);
+			var sale;
+			var list;
+			var minlist;
+			var phonelist;
+			var phinfo;
+			
+				layui.use(['table','form',"layer","upload"], function(){
+					  var table = layui.table,
+					  form = layui.form,
+					  layer = layui.layer,
+					  $ = layui.jquery,
+					  upload = layui.upload;
+					  $("#cart").mouseenter(function(){ 
+							  table.render({
+							    elem: '#test'
+							    ,url:'http://localhost:9527/order/customer/searchCart.action?extype=1'
+							    ,page: true
+							    ,height: 315
+								  , xhrFields: {
+									  withCredentials: true
+								  }
+							    ,toolbar: '#toolbarDemo'
+							    ,cellMinWidth: 60 //全局定义常规单元格的最小宽度，layui 2.2.1 新增
+							    ,cols: [
+							    		[
+									{type: 'checkbox', fixed: 'left'}
+								  ,{field:'exid', title:'购物车id', hide:true}
+							      ,{field:'pmodel',  align:'center',width:120, title: '型号'}
+							      ,{field:'pnnumber',   align:'center',width:60,title: '数量'}
+							      ,{field:'lame',  align:'center',width:80,title: '收件人'}
+							      ,{field:'osale', align:'center',title: '金额'}
+							      ,{fixed: 'right', title:'操作', toolbar: '#barDemo',align:'center', width:120}
+							    ]
+								  ]
+							  });
+					  });
+					  table.on('tool(demo)', function(obj){ //注：tool是工具条事件名，test是table原始容器的属性 lay-filter="对应的值"
+						  var data = obj.data; //获得当前行数据
+						  var layEvent = obj.event; //获得 lay-event 对应的值（也可以是表头的 event 参数对应的值）
+						  var tr = obj.tr; //获得当前行 tr 的DOM对象
+						 
+						  if(layEvent === 'del'){ //删除
+						    layer.confirm('真的删除这条记录吗', function(index){
+						      obj.del(); //删除对应行（tr）的DOM结构，并更新缓存
+						      layer.close(index);
+						      var datas = {"exid":data.exid};
+						      $.post("http://localhost:9527/order/customer/deleteCart.action",datas);
+						      //向服务端发送删除指令
+						    });
+						  } else if(layEvent === 'edit'){ //编辑
+						    //do something
+						    
+						    //同步更新缓存对应的值
+						    obj.update({
+						      username: '123'
+						      ,title: 'xxx'
+						    });
+						  }
+						});
+					  
+					  table.on('toolbar(demo)', function(obj){
+						  var checkStatus = table.checkStatus(obj.config.id);
+						    switch(obj.event){
+						    case 'submit':
+								var data = checkStatus.data;
+								var ids=[];
+								data.forEach(function(index,i) {
+									ids.push(index.exid);
+								});
+								if(ids != ''){
+							    		$.ajax({
+							    			data:"lids="+ids,
+							    			url:"http://localhost:9527/order/customer/insertOrder.action",
+											xhrFields: {
+												withCredentials: true
+											},
+							    			success: function(result){
+							    				if(result == '1'){
+													layer.msg('提交成功');
+												}else{
+													 layer.msg('提交失败');
+												}
+							    			}
+							    		});
+									break;
+								}else{
+									layer.msg('请选择要提交的数据', {icon: 1});
+									break;
+								}
+						      case 'dell':
+						        var data = checkStatus.data;
+						        layer.msg('选中了：'+ data.exid + ' 个');
+						      break;
+						    };
+						  });
+					  
+					  
+					  //表单监听
+					  form.on('submit(*)', function(data){
+						  layer.confirm('加入购物车吗', function(index){
+						      layer.close(index);
+						      $.ajax({
+									type:"post", 
+									url:"http://localhost:9527/order/customer/addcart.action",
+									data:JSON.stringify(data.field),
+								  xhrFields: {
+									  withCredentials: true
+								  },
+									contentType: "application/json;charset=utf-8",
+									success:function(result){
+										if(result.code >0){
+											return layer.msg("加入成功");
+										}else{
+											return layer.msg("加入失败");
+										}
+										
+									},
+									error:function(){
+										alert("失败");
+									}
+								});
+						      //向服务端发送删除指令
+						    });
+						  
+					  });
+					  
+					  //监听挂绳复选框
+					  form.on('checkbox(sling)', function(data){
+						  if(data.elem.checked){
+							  //打开数量开关
+							  console.log("111");
+							  $("#number").removeAttr("disabled");
+							  $("#minus").click(function(){
+									var text = $("#number").val();
+									if(text> 0){
+										$("#number").val(parseInt(text)-1);	
+									}
+								});
+							  $("#add").click(function(){
+							  console.log("00000");
+									var text = $("#number").val();
+									$("#number").val(parseInt(text)+1);
+									
+								});
+						  }else{
+							  $("#number").attr("disabled","disabled");
+						  } //是否被选中，true或者false
+
+						});
+					  
+					//监听支架复选框
+					  form.on('checkbox(holder)', function(data){
+						  console.log(data.elem); //得到checkbox原始DOM对象
+						  if(data.elem.checked){
+							  //打开数量开关
+							  $("#number2").removeAttr("disabled");
+							  console.log("11111111111111111");
+							  $("#minus2").click(function(){
+									var text = $("#number2").val();
+									if(text>0){
+										$("#number2").val(parseInt(text)-1);
+									}
+								});
+								$("#number2").keyup(function (){
+									var text = $(this).val();
+									console.log(text);
+									if(/[^\d]+/.test(text)){
+										$(this).val(0);
+										return layer.msg("请输入数字");
+									}
+								});
+								$("#add2").click(function(){
+									var text = $("#number2").val();
+									$("#number2").val(parseInt(text)+1);
+								});
+						  }else{
+							  $("#number2").attr("disabled","disabled");
+						  } //是否被选中，true或者false
+
+						});
+					  
+					  
+					  var uploadInst = upload.render({
+						    elem: '#upload'
+						    ,url: 'http://localhost:9527/order/customer/uploadPhoto.action'
+						    ,xhrFields: {
+							  withCredentials: true
+						    },
+						  before: function(obj){
+							  //预读本地文件示例，不支持ie8
+							  obj.preview(function(index, file, result){
+							  	$('#mujuphoto').empty();
+							  $('#mujuphoto').append("<img class='layui-upload-img' id='demo1'>");
+							  $('#demo1').attr('src', result); //图片链接（base64）
+							  });
+						  }
+						    ,done: function(res){
+						      //如果上传失败
+						      if(res.code = 0){
+						        return layer.msg('上传失败');
+						      }
+
+					    	  //上传成功
+					    	  // $('#imginput').val("file://G:"+res.data.src);
+						    }
+						    ,error: function(){
+						      //演示失败状态，并实现重传
+						      var demoText = $('#demoText');
+						      demoText.html('<span style="color: #FF5722;">上传失败</span> <a class="layui-btn layui-btn-xs demo-reload">重试</a>');
+						      demoText.find('.demo-reload').on('click', function(){
+						        uploadInst.upload();
+						      });
+						    }
+						  });
+					  
+					  $("#xuanzhe").click(function(){
+							$("#xuanzhe1").toggle();
+							if($("#xuanzhe1").css("display")=="none"){
+								$("#muju").empty();
+								$("#xuanzhe1").empty();
+								$("#xuanzhe2").empty();
+								$("#xuanzhe2").css("display","none");
+								$("#xuanzhe3").empty();
+								$("#xuanzhe3").css("display","none");
+								return;
+							}
+							$.ajax({
+								type:"post",
+								url:"http://localhost:9527/order/customer/searchPhone.action",
+								xhrFields: {
+									withCredentials: true
+								},
+								contentType:"application/json;charset=utf-8",
+								success:function(result){
+									list = result;
+									for(var i=0;i<result.length;i++){
+										$("#xuanzhe1").append("<li><button type='button' class='layui-btn layui-btn-xs pingpai' style='width:46px'>"+result[i].kname+"</button></li>")
+									}	
+								},
+								error:function(){
+									alert("失败");
+								}
+							});
+						});
+						$("#xuanzhe1").on("click",".pingpai",function(){
+								$("#xuanzhe2").toggle();
+								if($("#xuanzhe2").css("display")=="none"){
+									$(this).parent().siblings().toggle();
+									$("#muju").empty();
+									$("#xuanzhe2").empty();
+									$("#xuanzhe3").empty();
+									$("#xuanzhe3").css("display","none");
+									return;
+								}
+								var index = $(this).parent().index();
+								var brands = list[index].brands;
+								minlist=brands;
+								$(this).parent().siblings().toggle();
+								for(var i=0;i<brands.length;i++){
+									$("#xuanzhe2").append("<li><button type='button' class='layui-btn layui-btn-xs pingpai'>"+brands[i].pbrand+"</button></li>")
+								}	
+							
+						});
+						
+						$("#xuanzhe2").on("click",".pingpai",function(){
+							$("#xuanzhe3").toggle();
+							if($("#xuanzhe3").css("display")=="none"){
+								$(this).parent().siblings().toggle();
+								$("#xuanzhe3").empty();
+								$("#muju").empty();
+								$("#xuanzhe3").css("display","none");
+								return;
+							}
+							var index = $(this).parent().index();
+							var phinfo = minlist[index].phoneInfos;
+							phonelist=phinfo;
+							$(this).parent().siblings().toggle();
+							for(var i=0;i<phinfo.length;i++){
+								$("#xuanzhe3").append("<li><button type='button' class='layui-btn layui-btn-xs pingpai'>"+phinfo[i].pmodel+"</button></li>")
+							}	
+						
+						});
+						
+						$("#xuanzhe3").on("click",".pingpai",function(){
+							$(this).parent().siblings().toggle();
+							var index = $(this).parent().index();
+							phinfo = phonelist[index];
+							$("#muju").empty();
+							$("#phoneid").val();
+							$("#osale").val();
+							console.log("1263553786");
+							console.log($(this).parent().siblings().css("display"))
+								console.log("111");
+								$("#muju").append("<div id='mujuphoto' style='height: 600px;width: 300px;background: #D2691E;display:inline-block;border-radius: 10px;overflow: hidden;text-align:center;'></div>");
+								$("#upload").removeAttr("disabled");
+								console.log("ceshi");
+								$("#phoneid").val(phinfo.pid);
+								sale = phinfo.psale;
+								$("#osale").val(phinfo.psale);
+							
+						});
+						
+						
+						 //订单信息识别
+						$("#discern").click(function(){
+							var text = $("#discerntext").val();
+							if(text == ""){
+								layer.open({
+									  type: 0,
+									  title: '提示'
+									  ,content: '请输入内容（姓名|手机号码|省|市|县|详细地址|备注）'
+									});
+							}else{
+									$("#shoujianren").val(text.split('|')[0]);
+									$("#phone").val(text.split('|')[1]);
+									$("#sheng").val(text.split('|')[2]);
+									$("#shi").val(text.split('|')[3]);
+									$("#xian").val(text.split('|')[4]);
+									$("#xiangxi").val(text.split('|')[5]);
+									$("#remark").val(text.split('|')[6]);
+							}
+							
+						});
+						
+						//挂绳数量
+						
+						$("#number").keyup(function (){
+							var text = $(this).val();
+							if(/[^\d]+/.test(text)){
+								$(this).val(0);
+								return layer.msg("请输入数字");
+							}
+						});
+						
+						
+						//支架数量选择
+						
+						
+						
+						//手机壳数量选择
+						$("#minus1").click(function(){
+							var text = $("#number1").val();
+							if(/[123456789]{1}\d*/.test(text)){
+									$("#number1").val(text-1);
+									$("#osale").val(sale*(parseInt(text)-1));
+							}else if(/[^\d]+/.test(text)){
+								layer.open({
+									  type: 0,
+									  title: '提示'
+									  ,content: '请输入正确数值'
+									});	
+							}
+						});
+						
+						$("#add1").click(function(){
+							var text = $("#number1").val();
+							if(/[0-9]{1}\d*/.test(text)){
+									$("#number1").val(parseInt(text)+1);
+									$("#osale").val(sale*(parseInt(text)+1));
+							}else if(/[^\d]+/.test(text)){
+								layer.open({
+									  type: 0,
+									  title: '提示'
+									  ,content: '请输入正确数值'
+									});	
+							}
+						});
+					  
+					});
+			 
+			
+		</script><!-- 主界面设置结束 -->
+	</body>
+</html>

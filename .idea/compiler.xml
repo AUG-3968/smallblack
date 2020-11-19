@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="cloud-jskj-user8004" />
+        <module name="cloud-jskj-payment8001" />
+        <module name="cloud-jskj-model" />
+        <module name="cloud-jskj-model8007" />
+        <module name="cloud-jskj-entity" />
+        <module name="cloud-jskj-static" />
+        <module name="cloud-jskj-static9001" />
+        <module name="cloud-jskj-regist_or_sigin8005" />
+        <module name="cloud-jskj- logistics8003" />
+        <module name="cloud-jskj-configceter8006" />
+        <module name="cloud-jskj-route9527" />
+        <module name="cloud-jskj-payment9001" />
+        <module name="cloud-jskj-configcenter3344" />
+        <module name="cloud-jskj-configcenter" />
+        <module name="cloud-jskj-order8002" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="ceshi1" target="1.8" />
+      <module name="ceshi2" target="1.8" />
+      <module name="cloud-jskj- logistics9003" target="1.8" />
+      <module name="cloud-jskj-common" target="1.8" />
+      <module name="cloud-jskj-configcenter" target="1.8" />
+      <module name="cloud-jskj-configcenter3344" target="1.8" />
+      <module name="cloud-jskj-configceter8006 (1)" target="1.8" />
+      <module name="cloud-jskj-model" target="1.8" />
+      <module name="cloud-jskj-static" target="1.8" />
+      <module name="cloud-jskj-util" target="1.8" />
+      <module name="cloud-jskj.centerconfig9006" target="1.8" />
+      <module name="could-jskj-order9002" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

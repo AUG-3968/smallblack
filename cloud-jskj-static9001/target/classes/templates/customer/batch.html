@@ -1,0 +1,197 @@
+<html xmlns:th=http://www.thymeleaf.org>
+<head>
+<link rel="stylesheet" type="text/css" th:href="@{/css/customer/ordermanager.css}"/>
+<link rel="stylesheet" type="text/css" th:href="@{/css/left.css}"/>
+<link rel="stylesheet" type="text/css" th:href="@{/css/top.css}"/>
+<link rel="stylesheet" type="text/css" th:href="@{/plug-in/font-awesome-4.7.0/css/font-awesome.min.css}"/>
+<link rel="stylesheet" type="text/css" th:href="@{/plug-in/layui/css/layui.css}" />
+<script th:src="@{/js/jquery.js}" type="text/javascript" charset="utf-8"></script>
+<script th:src="@{/plug-in/layui/layui.js}" type="text/javascript" charset="utf-8"></script>
+<style type="text/css">
+	.layui-inline {
+		font-size:14px;
+	}
+	#test16{
+		width:250px;
+	}
+	#test15{
+		width:110px;
+	}
+
+</style>
+</head>
+<body>
+		<!-- 顶部界面设置开始 -->
+		<div class="top-1">
+			<div class="top-1-1">
+				<a >京鲨科技</a>
+			</div>
+			<div class="top-1-7">
+				<div style="margin-left: 14px;margin-top: 25px;padding-bottom: 20px;">
+					<i class="fa fa-power-off"></i>
+				</div>
+			</div>
+			<div class="top-1-7" >
+				<div style="margin-left: 14px;margin-top: 25px;padding-bottom: 20px;">
+					<i class="fa fa-bell" ></i>
+				</div>
+				<span class="x">2</span>
+				<div class="jd-b-1-8-1">
+					
+					<div style="height: 300px; width: 320px;background-color: white;border-bottom: 1px solid #DEE1E6;overflow: auto;color: black;">
+						消息
+						<div style="height: 70px;padding:10px 20px 0 20px ;border-bottom: 1px solid #DEE1E6;">
+							<div style="font-size: 10px;background-color: #DEE1E6;text-align: center;border-radius: 3px;">2019-3-26 22:36</div>
+							<div style="float: left;height: 57px;">
+								<img th:src="@{../img/head.jpg}" style="height: 40px; border-radius: 10px;" />
+							</div> 
+							<div style=" float: left;font-size: 14px;margin-left: 10px;width: 200px;">
+								<div>鲸鲨</div>
+							</div>
+							<div style="float: left;font-size: 10px;width: 200px;margin-left: 10px;margin-top: 10px;">
+								<div>亲亲，这边给您发货了，请保持电话畅通，宝贝快递正在赶来的路上</div> 
+							</div>
+						</div>
+					</div>
+					<!--全部页面 -->
+					<div style="height: 50px; ">
+						<div style="float: right;font-size: 12px; line-height: 50px;margin-right: 20px;">查看全部</div>
+					</div>
+				</div>
+			</div>
+			<div class="top-1-7">
+				<div style="margin-left: 14px;margin-top: 25px;padding-bottom: 20px;"  id="cart">
+					<i class="fa fa-shopping-cart" ></i>
+				</div>
+				<div class="jd-b-1-8-2">
+					<p style="color: #000000;font-size: 16px;margin: 2px 0px 0px 5px;">
+						购物车
+					</p>
+					<div style="width: 540px;margin: 4px 0px 0px 5px;">
+						<table class="layui-hide" id="test"  lay-filter="demo"></table>
+					</div>
+				</div>
+			</div>
+			<div class="top-1-6">
+				sky
+			</div>
+			<div class="top-1-5">
+				<a><img th:src="@{../img/head.jpg}"></a>
+			</div>
+
+		</div>
+		<!-- 顶部界面结束 -->
+		<!-- 主界面设置 -->
+		<div class="main">
+			<!-- 容器设置 -->
+			<div class="container">
+				<!-- 左部菜单设置 -->
+				<div class="left">
+					<ul class="left-1">
+						<div class="left-1-1">
+							<li>
+								<a th:href="@{/jsp/customer/diy.jsp}"><i class="fa fa-comments-o fa-lg" aria-hidden="true"></i>Diy订制</a>
+							</li>
+						</div>
+
+						<div class="left-1-1">
+							<li>
+								<a th:href="@{/jsp/customer/batch.jsp}"><i class="fa fa-file-word-o fa-lg" aria-hidden="true"></i>批量定制</a>
+							</li>							
+						</div>
+						<div class="left-1-1">
+							<li>
+								<a th:href="@{/ArticleServlet_manager.do}"><i class="fa fa-database fa-lg" aria-hidden="true"></i>订单管理</a>
+							</li>
+						</div>
+						<div class="left-1-1">
+							<li>
+								<a><i class="fa fa-user-plus fa-lg" aria-hidden="true"></i>物流信息</a>
+							</li>							
+						</div>
+						<div class="left-1-1">
+							<li>
+								<a><i class="fa fa-heart fa-lg" aria-hidden="true"></i>我的信息</a>
+							</li>							
+						</div>
+						<div class="left-1-1">
+							<li>
+								<a><i class="fa fa-star fa-lg" aria-hidden="true"></i>使用说明</a>
+							</li>							
+						</div>
+					</ul>
+				</div>
+				<!-- 左部菜单结束 -->
+				<!-- 中间部分设置 -->
+				<div class="middle">
+					<!-- 添加中间模块容器 -->
+					<div class="middle-1">
+						<!--个人信息区域开始 -->
+						<div class="middle-top">
+							<p style="color: black;font-size: 22px;">批量定制</p>
+						</div>
+						<div class="logistics-1">
+							<div class="logistics-1-1">
+								<select name="kname" style="width:120px;height:25px;">
+									<option value="">材质名称</option>
+								</select>
+							</div>
+							<div class="logistics-1-1">
+								<form method="post" action="${pageContext.servletContext.contextPath }/customer/form.action" id="b" enctype="multipart/form-data" style="float:left;"> 
+									<button type="button" class="layui-btn layui-btn-radius" id="uploadExcel" onclick="$('#i').click()">上传excle表格</button>
+									<input type="file"  style="display: none;" name="forms" id="i"  onchange="change()"/>
+								</form>
+							</div>
+							<div class="logistics-1-1">
+								<form method="post" action="${pageContext.servletContext.contextPath }/form.action" id="b" enctype="multipart/form-data" style="float:left;"> 
+									<button type="button" class="layui-btn layui-btn-radius" id="uploadExcel" onclick="$('#i').click()">上传图片文件夹</button>
+									<input type="file"  style="display: none;" name="forms" id="i"  onchange="change()"/>
+								</form>
+							</div>
+						</div>												
+						<div>
+							<table id="demo" lay-filter="test"></table>
+						</div>
+						<!-- 文章管理区域结束 -->
+					</div>
+					<!-- 中间容器结束 -->
+				</div>
+				<script type="text/html" id="barDemo">
+           					<a class="layui-btn layui-btn-xs" lay-event="edit">修改</a>
+  							<a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+						</script>
+				<!-- 中间容器结束 -->
+				<!-- 右部容器设置 -->
+			</div>
+			<script>
+						layui.use('table', function(){
+				  			var table = layui.table;
+							table.render({
+						    elem: '#demo'
+						    ,url:'/${pageContext.servletContext.contextPath}/batch.action'
+						    ,title: '用户数据表'
+						    ,totalRow: true
+						    ,cols: [[
+						      {type: 'checkbox', fixed: 'left'}
+						      ,{field:'tbid', title:'淘宝单号', width:100,sort: true}
+						      ,{field:'lame', title:'收件人', width:80}
+							  ,{field:'connumber', title:'固定电话', width:100, sort: true}
+							  ,{field:'connumber', title:'电话', width:100, sort: true}
+							  ,{field:'ladress', title:'详细地址', width:150}
+							  ,{field:'osendinfo', title:'发货信息', width:150}
+							  ,{field:'photosrc', title:'图片', width:120}
+							  ,{field:'pnnumber', title:'数量', width:80}
+							  ,{field:'oremark', title:'备注', width:120}
+							  ,{fixed: 'right', title:'操作', toolbar: '#barDemo', width:150}
+						    ]]
+						    ,page: true
+						  });
+						});
+						function change() {
+							$('#b').submit();
+						}	
+				</script>
+			<!-- 容器设置结束 -->
+		</div>
+	</body>
+</html>

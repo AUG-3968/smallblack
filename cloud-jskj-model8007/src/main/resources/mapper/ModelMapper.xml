@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper 
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jskj.model.dao.ModelMapper">
+	<select id="findAllModel"  resultType="com.jskj.entities.ModelViewbean">
+	SELECT phoneinfo.`Pid`,kind.`Kname`,brand.`Pbrand`,phoneinfo.`Pmodel` 
+	FROM kind,brand,phoneinfo 
+	WHERE phoneinfo.`Bid`=brand.`Bid` AND brand.`Kid`=kind.`Kid`
+	<if test="kind != null  and kind!=''">
+		AND brand.`Kid`= #{kind}
+	</if>
+	<if test="bname != null  and bname!=''">
+		AND brand.`Bid`= #{bname}
+	</if>
+	<if test="pmodel != null  and pmodel!=''">
+		AND phoneinfo.`Pid`= #{pmodel}
+	</if>
+	</select>
+</mapper>
